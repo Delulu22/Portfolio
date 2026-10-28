@@ -1,0 +1,3 @@
+# Ignore old C++ practice files
+.DS_Store
+Thumbs.db
