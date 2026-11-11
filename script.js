@@ -6,27 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const root = document.documentElement;
   const hasIO = "IntersectionObserver" in window;
 
-  // 1. Loader: emblem → signal flare → the gate opens (once per visit)
-  const loader = document.getElementById("loader");
-  if (loader && root.classList.contains("show-loader")) {
-    let opened = false;
-    const openGate = () => {
-      if (opened) return;
-      opened = true;
-      root.classList.add("gates-opening");
-      loader.classList.add("is-opening");
-      try { sessionStorage.setItem("jasper-gate-opened", "1"); } catch (e) { /* private mode */ }
-      setTimeout(() => {
-        root.classList.remove("show-loader", "gates-opening");
-      }, 1000);
-    };
-    const timer = setTimeout(openGate, 1650);
-    loader.addEventListener("click", () => {
-      clearTimeout(timer);
-      openGate();
-    });
-  }
-
   // 2. Footer year
   const yearEl = document.getElementById("currentYear");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -127,45 +106,45 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 9. Project screenshots: show a tidy placeholder if an image is missing
-  document.querySelectorAll(".shot img").forEach((img) => {
-    const markMissing = () => img.closest(".shot")?.classList.add("is-missing");
-    if (img.complete && img.naturalWidth === 0) markMissing();
-    img.addEventListener("error", markMissing);
-  });
+  // 9. Project case studies (native <dialog>: focus handling + Esc built in)
+  const cases = document.querySelectorAll("dialog.case");
+  let caseOpener = null;
 
-  // 10. Design lightbox
-  const designModal = document.getElementById("designModal");
-  const closeModalBtn = document.getElementById("closeDesignModalBtn");
-  let lastFocus = null;
-
-  const openModal = () => {
-    if (!designModal) return;
-    lastFocus = document.activeElement;
-    designModal.classList.add("open");
-    designModal.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
-    closeModalBtn?.focus();
+  const openCase = (id) => {
+    const dialog = document.getElementById("case-" + id);
+    if (!dialog || typeof dialog.showModal !== "function") return false;
+    cases.forEach((d) => { if (d.open && d !== dialog) d.close(); });
+    if (!dialog.open) dialog.showModal();
+    dialog.scrollTop = 0;
+    history.replaceState(null, "", "#" + id);
+    return true;
   };
 
-  const closeModal = () => {
-    if (!designModal || !designModal.classList.contains("open")) return;
-    designModal.classList.remove("open");
-    designModal.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = "";
-    lastFocus?.focus();
-  };
-
-  document.querySelectorAll("[data-open-modal]").forEach((el) => el.addEventListener("click", openModal));
-  closeModalBtn?.addEventListener("click", closeModal);
-  designModal?.addEventListener("click", (e) => {
-    if (e.target === designModal) closeModal();
+  document.querySelectorAll(".project-card[data-project]").forEach((card) => {
+    card.addEventListener("click", (e) => {
+      caseOpener = card;
+      if (openCase(card.dataset.project)) e.preventDefault();
+    });
   });
+
+  cases.forEach((dialog) => {
+    dialog.querySelectorAll("[data-close]").forEach((btn) => btn.addEventListener("click", () => dialog.close()));
+    dialog.querySelectorAll("[data-open]").forEach((btn) => btn.addEventListener("click", () => openCase(btn.dataset.open)));
+    // Click on the dimmed backdrop closes it
+    dialog.addEventListener("click", (e) => { if (e.target === dialog) dialog.close(); });
+    dialog.addEventListener("close", () => {
+      if (![...cases].some((d) => d.open)) {
+        history.replaceState(null, "", location.pathname + location.search);
+        caseOpener?.focus();
+      }
+    });
+  });
+
+  // Deep link: index.html#pick-a-frame opens that case study
+  if (location.hash) openCase(location.hash.slice(1));
+
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      closeModal();
-      closeMenu();
-    }
+    if (e.key === "Escape") closeMenu();
   });
 
   // 11. Copy email

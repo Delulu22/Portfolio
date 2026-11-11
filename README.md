@@ -13,12 +13,10 @@ Welcome to the repository for my personal portfolio website! Originally from **K
 ## ✨ Key Website Highlights
 
 - 🕊️ **"Beyond the Walls" Theme (inspired by the feeling of freedom)**:
-  - **Gate-opening intro:** a wings emblem draws itself, a green signal flare rises, and a stone gate opens onto the sky and sea (plays once per visit, click to skip).
   - **Day Mode (Light):** Bright daytime sky, sun glow, drifting clouds, a flock of birds, wind gusts, and a rolling sea.
   - **Night Mode (Dark):** Starry sky with a shooting star, moonlight, and a glowing bioluminescent sea.
   - **Smooth by design:** animations only use `transform` / `opacity`, pause when the hero is off-screen, and switch off for users who prefer reduced motion.
-- 🗺️ **Expedition Log Projects**: Each project is presented as an "expedition" with real screenshots in device frames.
-- 🔍 **Full-Height UI Mockup Lightbox**: Inspect my conversion funnel and landing page UI/UX design exploration directly in an interactive modal.
+- 🗂️ **Project Case Studies**: Each project card opens a full case study with the goal, key features, real screenshots, and tech stack.
 
 ---
 

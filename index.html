@@ -7,23 +7,16 @@
   <meta name="description" content="Portfolio of Jasper Tang See Yong, Software Engineering undergraduate at APU Kuala Lumpur focusing on Frontend Development, UI/UX Design, and Flutter mobile apps." />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%232f5d46'/%3E%3Cg fill='%23f3eee3'%3E%3Cpath d='M32 16 35 30 32 50 29 30Z'/%3E%3Cg id='w'%3E%3Cpath d='M36 21C44 13 53 10 61 10 57 17 49 23 38 26Z'/%3E%3Cpath d='M36 30C44 24 52 22 59 23 54 29 46 32 38 34Z'/%3E%3Cpath d='M36 39C42 35 49 34 55 36 50 41 44 43 38 42Z'/%3E%3C/g%3E%3Cuse href='%23w' transform='matrix(-1 0 0 1 64 0)'/%3E%3C/g%3E%3C/svg%3E" />
 
-  <!-- Theme + loader decision before first paint -->
+  <!-- Theme before first paint (prevents a flash) -->
   <script>
     (function () {
-      var d = document.documentElement, t = null, seen = false;
+      var d = document.documentElement, t = null;
       try { t = localStorage.getItem("jasper-portfolio-theme"); } catch (e) {}
       if (t !== "light" && t !== "dark") {
         t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
       }
       d.setAttribute("data-theme", t);
       d.classList.add("js");
-      try { seen = sessionStorage.getItem("jasper-gate-opened") === "1"; } catch (e) {}
-      var still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (!seen && !still) {
-        d.classList.add("show-loader");
-        // Failsafe: never trap the page behind the gate if script.js fails
-        setTimeout(function () { d.classList.remove("show-loader"); }, 5000);
-      }
     })();
   </script>
 
@@ -31,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=6" />
 </head>
 <body>
 
@@ -48,25 +41,11 @@
     </symbol>
   </svg>
 
-  <!-- ===== LOADER: emblem → signal flare → the gate opens ===== -->
-  <div class="loader" id="loader" aria-hidden="true">
-    <div class="gate gate-left"></div>
-    <div class="gate gate-right"></div>
-    <div class="gate-seam"></div>
-    <div class="flare"><span class="flare-trail"></span><span class="flare-head"></span></div>
-    <div class="loader-center">
-      <svg class="loader-emblem"><use href="#wings" /></svg>
-      <p class="loader-name">Jasper Tang</p>
-      <p class="loader-sub">Beyond the walls</p>
-    </div>
-    <p class="loader-skip">Click to skip</p>
-  </div>
-
   <!-- ===== NAVIGATION ===== -->
   <header class="navbar" id="navbar">
     <div class="container nav-inner">
       <a href="#home" class="brand" aria-label="Jasper Tang, back to top">
-        <span class="brand-badge"><svg><use href="#wings" /></svg></span>
+        <span class="brand-badge"><svg width="26" height="26"><use href="#wings" /></svg></span>
         <span class="brand-text">Jasper Tang</span>
       </a>
 
@@ -179,7 +158,7 @@
 
           <div class="hero-cta">
             <a href="#projects" class="btn btn-primary">
-              See my expeditions
+              View my work
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
             <a href="RESUME_JASPER%20TANG%20SEE%20YONG.pdf" download="RESUME_JASPER_TANG_SEE_YONG.pdf" class="btn btn-secondary">
@@ -199,7 +178,7 @@
           <div class="profile-card">
             <div class="profile-card-top">
               <span class="profile-id">ID · JT-2005</span>
-              <svg class="profile-emblem"><use href="#wings" /></svg>
+              <svg class="profile-emblem" width="30" height="30"><use href="#wings" /></svg>
             </div>
             <div class="profile-identity">
               <div class="avatar-wrapper">
@@ -275,191 +254,98 @@
       </div>
     </section>
 
-    <!-- ===== PROJECTS: expedition log ===== -->
+    <!-- ===== PROJECTS: cards → case studies ===== -->
     <section id="projects" class="section section-alt">
       <div class="container">
         <div class="section-header reveal">
-          <span class="section-eyebrow">02 · Expedition log</span>
+          <span class="section-eyebrow">02 · Projects</span>
           <h2 class="section-title">Selected <span class="accent">work.</span></h2>
-          <p class="section-desc">Each project is one expedition: a problem I went out to solve, and what I brought back.</p>
+          <p class="section-desc">Four projects across mobile, desktop, and UI/UX design. Open any project to see what I built.</p>
         </div>
 
-        <div class="expeditions">
+        <div class="projects-grid">
 
-          <!-- 01 · Pick A-Frame -->
-          <article class="expedition expedition-feature reveal">
-            <div class="exp-info exp-info-split">
-              <div>
-                <div class="exp-head">
-                  <span class="exp-no">Expedition 01 · Featured</span>
-                  <span class="stamp stamp-done">Completed</span>
-                </div>
-                <h3 class="exp-title exp-title-xl">Pick A-Frame</h3>
-                <p class="exp-kind">Flutter mobile app</p>
-              </div>
-              <div>
-                <p class="exp-text">A cross-platform app that lets gallery owners, artists, and frame shops browse frame mouldings, preview them around their artwork, and see the result on a wall before anything is cut.</p>
-                <dl class="exp-meta">
-                  <div><dt>Built for</dt><dd>Galleries, artists &amp; frame shops</dd></div>
-                  <div><dt>Features</dt><dd>Upload · Catalog · KL shop map · Visualizer · Exhibit room</dd></div>
-                </dl>
-                <div class="exp-tags">
-                  <span class="tag">Flutter</span>
-                  <span class="tag">Mobile UI/UX</span>
-                  <span class="tag">Cross-platform</span>
-                </div>
+          <a href="#pick-a-frame" class="project-card reveal" data-project="pick-a-frame" aria-haspopup="dialog">
+            <div class="pc-cover cover-phones">
+              <div class="phone shot"><img src="assets/projects/PAF_Catalog.png" alt="" loading="lazy" /></div>
+              <div class="phone shot phone-lead"><img src="assets/projects/PAF_Visualizer.png" alt="" loading="lazy" /></div>
+              <div class="phone shot"><img src="assets/projects/PAF_Exhibit-Room.png" alt="" loading="lazy" /></div>
+            </div>
+            <div class="pc-body">
+              <div class="pc-top"><span class="pc-no">Project 01</span><span class="pc-kind">Flutter · Mobile app</span></div>
+              <h3 class="pc-title">Pick A-Frame</h3>
+              <p class="pc-desc">Preview custom framing on your artwork, and see it on a wall, before a single cut is made.</p>
+              <div class="pc-foot">
+                <div class="pc-tags"><span class="tag">Flutter</span><span class="tag">Firebase</span></div>
+                <span class="pc-cta">View case study <span aria-hidden="true">→</span></span>
               </div>
             </div>
+          </a>
 
-            <div class="exp-media media-gallery" tabindex="0" aria-label="Pick A-Frame screens">
-              <figure class="screen">
-                <div class="phone shot"><img src="assets/projects/PAF_landingPage.png" alt="Pick A-Frame landing page with artwork upload" loading="lazy" /></div>
-                <figcaption><b>01</b> Upload your art</figcaption>
-              </figure>
-              <figure class="screen">
-                <div class="phone shot"><img src="assets/projects/PAF_Catalog.png" alt="Catalog of frame mouldings with prices per metre" loading="lazy" /></div>
-                <figcaption><b>02</b> Browse mouldings</figcaption>
-              </figure>
-              <figure class="screen">
-                <div class="phone shot"><img src="assets/projects/PAF_Catalog-Map.png" alt="Map of frame shops in Kuala Lumpur with their mouldings" loading="lazy" /></div>
-                <figcaption><b>03</b> Find KL shops</figcaption>
-              </figure>
-              <figure class="screen">
-                <div class="phone shot"><img src="assets/projects/PAF_Visualizer.png" alt="Visualizer previewing a red frame and mat around an artwork" loading="lazy" /></div>
-                <figcaption><b>04</b> Design the frame</figcaption>
-              </figure>
-              <figure class="screen">
-                <div class="phone shot"><img src="assets/projects/PAF_Exhibit-Room.png" alt="Exhibit room showing framed artwork on a living room wall" loading="lazy" /></div>
-                <figcaption><b>05</b> See it on a wall</figcaption>
-              </figure>
+          <a href="#service-centre" class="project-card reveal" data-project="service-centre" aria-haspopup="dialog">
+            <div class="pc-cover cover-windows">
+              <div class="window shot window-back"><img src="assets/projects/ASC_landingPage.png" alt="" loading="lazy" /></div>
+              <div class="window shot window-front"><img src="assets/projects/ASC_Homepage.png" alt="" loading="lazy" /></div>
             </div>
-          </article>
+            <div class="pc-body">
+              <div class="pc-top"><span class="pc-no">Project 02</span><span class="pc-kind">Java · Desktop app</span></div>
+              <h3 class="pc-title">Automotive Service Centre</h3>
+              <p class="pc-desc">A four-role desktop system for vehicle service bookings, payments, and reports.</p>
+              <div class="pc-foot">
+                <div class="pc-tags"><span class="tag">Java Swing</span><span class="tag">OOP &amp; MVC</span></div>
+                <span class="pc-cta">View case study <span aria-hidden="true">→</span></span>
+              </div>
+            </div>
+          </a>
 
-          <!-- 02 · Wish Group website (text only) -->
-          <article class="expedition expedition-text reveal">
-            <div class="exp-info exp-info-split">
-              <div>
-                <div class="exp-head">
-                  <span class="exp-no">Expedition 02</span>
-                  <span class="stamp stamp-done">Shipped</span>
-                </div>
-                <h3 class="exp-title">Company website overhaul</h3>
-                <p class="exp-kind">Internship · Wish Group Resources</p>
-              </div>
-              <div>
-                <p class="exp-text">The company's website was outdated and hard to use on mobile. I redesigned and rebuilt the pages into a clean, responsive web and mobile experience.</p>
-                <div class="exp-tags">
-                  <span class="tag">HTML</span>
-                  <span class="tag">CSS</span>
-                  <span class="tag">JavaScript</span>
-                  <span class="tag">Tailwind</span>
-                  <span class="tag">Canva</span>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <!-- 03 · Funnel UI -->
-          <article class="expedition reveal">
-            <div class="exp-media">
-              <button type="button" class="browser shot shot-tall" data-open-modal aria-label="View the full funnel design mockup">
-                <span class="frame-bar"><span></span><span></span><span></span></span>
-                <img src="assets/funnel-design.png" alt="" loading="lazy" />
-                <span class="zoom-pill">🔍 View full design</span>
-              </button>
-            </div>
-            <div class="exp-info">
-              <div class="exp-head">
-                <span class="exp-no">Expedition 03</span>
-                <span class="stamp stamp-design">Design</span>
-              </div>
-              <h3 class="exp-title">Conversion funnel concept</h3>
-              <p class="exp-kind">UI/UX practice</p>
-              <p class="exp-text">A self-initiated landing page and conversion funnel design, exploring visual hierarchy, tablet mockups, and hero layouts.</p>
-              <div class="exp-tags">
-                <span class="tag">UI/UX</span>
-                <span class="tag">Landing page</span>
-                <span class="tag">Figma / Canva</span>
-              </div>
-              <div class="exp-actions">
-                <button type="button" class="btn btn-sm btn-secondary" data-open-modal>View full mockup ↗</button>
-              </div>
-            </div>
-          </article>
-
-          <!-- 04 · Java vehicle system -->
-          <article class="expedition reveal">
-            <div class="exp-media media-stack">
-              <div class="window shot window-back"><img src="assets/projects/ASC_landingPage.png" alt="APU Automotive Service Centre login window" loading="lazy" /></div>
-              <div class="window shot window-front"><img src="assets/projects/ASC_Homepage.png" alt="Customer homepage with options to register vehicles and book appointments" loading="lazy" /></div>
-            </div>
-            <div class="exp-info">
-              <div class="exp-head">
-                <span class="exp-no">Expedition 04</span>
-                <span class="stamp stamp-done">Completed</span>
-              </div>
-              <h3 class="exp-title">Vehicle service system</h3>
-              <p class="exp-kind">APU Automotive Service Centre · Java OOP</p>
-              <p class="exp-text">A multi-role Java Swing desktop app built with OOP and MVC, where customers, counter staff, technicians, and managers handle bookings, payments, and reports.</p>
-              <dl class="exp-meta">
-                <div><dt>Roles</dt><dd>Customer · Staff · Technician · Manager</dd></div>
-              </dl>
-              <div class="exp-tags">
-                <span class="tag">Java</span>
-                <span class="tag">Swing</span>
-                <span class="tag">OOP &amp; MVC</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- 05 · C++ parcel system -->
-          <article class="expedition reveal">
-            <div class="exp-media">
+          <a href="#parcel-system" class="project-card reveal" data-project="parcel-system" aria-haspopup="dialog">
+            <div class="pc-cover cover-terminal">
               <div class="terminal shot">
                 <div class="frame-bar"><span></span><span></span><span></span></div>
-<pre class="term" aria-label="Console menus of the Smart Campus Parcel System">=== Smart Campus Parcel System ===
-1. Parcel Intake, Sorting &amp; Processing (Module 1)
-2. Parcel Service &amp; Collection (Module 2)
-3. Collection Counter &amp; Delivery Resources (Module 3)
-4. Parcel Activity &amp; Record Management (Module 4)
-5. Parcel Category Organisation (Module 5)
+<pre class="term">=== Smart Campus Parcel System ===
+1. Parcel Intake, Sorting &amp; Processing
+2. Parcel Service &amp; Collection
+3. Collection Counter &amp; Delivery Resources
+4. Parcel Activity &amp; Record Management
+5. Parcel Category Organisation
 0. Exit
-Choice: <b>2</b>
-
-=== Module 2: Parcel Service &amp; Collection ===
-1. Create service request
-2. View active requests (By ID / By Priority)
-3. Peek next request
-4. Process next request
-5. Cancel request
-0. Back to Main Menu
 Choice: <span class="cursor"></span></pre>
               </div>
             </div>
-            <div class="exp-info">
-              <div class="exp-head">
-                <span class="exp-no">Expedition 05</span>
-                <span class="stamp stamp-done">Completed</span>
-              </div>
-              <h3 class="exp-title">Parcel priority queue</h3>
-              <p class="exp-kind">Smart Campus Parcel System · C++ data structures</p>
-              <p class="exp-text">A C++ parcel collection and delivery system using a custom singly linked list priority queue and CSV file sync to process urgent parcels first.</p>
-              <dl class="exp-meta">
-                <div><dt>Priority</dt><dd>P1 Urgent → P2 Express → P3 Normal</dd></div>
-              </dl>
-              <div class="exp-tags">
-                <span class="tag">C++</span>
-                <span class="tag">Linked list</span>
-                <span class="tag">Priority queue</span>
+            <div class="pc-body">
+              <div class="pc-top"><span class="pc-no">Project 03</span><span class="pc-kind">C++ · Data structures</span></div>
+              <h3 class="pc-title">Smart Campus Parcel System</h3>
+              <p class="pc-desc">A console system that processes campus parcels by urgency with a custom priority queue.</p>
+              <div class="pc-foot">
+                <div class="pc-tags"><span class="tag">C++</span><span class="tag">Linked list</span></div>
+                <span class="pc-cta">View case study <span aria-hidden="true">→</span></span>
               </div>
             </div>
-          </article>
+          </a>
+
+          <a href="#funnel-concept" class="project-card reveal" data-project="funnel-concept" aria-haspopup="dialog">
+            <div class="pc-cover cover-browser">
+              <div class="browser shot">
+                <div class="frame-bar"><span></span><span></span><span></span></div>
+                <img src="assets/funnel-design.png" alt="" loading="lazy" />
+              </div>
+            </div>
+            <div class="pc-body">
+              <div class="pc-top"><span class="pc-no">Project 04</span><span class="pc-kind">UI/UX · Web design</span></div>
+              <h3 class="pc-title">Conversion Funnel Concept</h3>
+              <p class="pc-desc">A self-initiated landing page and conversion funnel design, from hero to call to action.</p>
+              <div class="pc-foot">
+                <div class="pc-tags"><span class="tag">UI/UX</span><span class="tag">Figma / Canva</span></div>
+                <span class="pc-cta">View case study <span aria-hidden="true">→</span></span>
+              </div>
+            </div>
+          </a>
         </div>
 
-        <!-- Next expedition -->
+        <!-- What's next -->
         <div class="next-expedition reveal">
           <div class="next-head">
-            <span class="exp-no">Next expedition</span>
+            <span class="pc-no">Up next</span>
             <h3>Two things I want to build for my family</h3>
           </div>
           <div class="next-grid">
@@ -705,29 +591,260 @@ Choice: <span class="cursor"></span></pre>
     <svg class="footer-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 C240 5 480 5 720 30 S1200 55 1440 30 V60 H0Z"/></svg>
     <div class="footer-sea">
       <div class="container footer-inner">
-        <svg class="footer-emblem" aria-hidden="true"><use href="#wings" /></svg>
+        <svg class="footer-emblem" width="44" height="44" aria-hidden="true"><use href="#wings" /></svg>
         <p class="footer-motto">Keep moving forward.</p>
         <p class="footer-credit">Designed &amp; built by <strong>Jasper Tang See Yong</strong> · <span id="currentYear">2026</span> · <a href="#home">Back to top ↑</a></p>
       </div>
     </div>
   </footer>
 
-  <!-- ===== DESIGN LIGHTBOX ===== -->
-  <div class="modal-backdrop" id="designModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="designModalTitle">
-    <div class="modal-container">
-      <div class="modal-header">
-        <div>
-          <h3 id="designModalTitle">Conversion funnel &amp; landing page design</h3>
-          <p>Scroll inside to see the full mockup.</p>
-        </div>
-        <button type="button" class="modal-close" id="closeDesignModalBtn" aria-label="Close">✕</button>
-      </div>
-      <div class="modal-body">
-        <img src="assets/funnel-design.png" alt="Full conversion funnel landing page UI design by Jasper Tang" class="modal-full-img" loading="lazy" />
-      </div>
-    </div>
-  </div>
+  <!-- ===== CASE STUDIES (opened from the project cards) ===== -->
 
-  <script src="script.js"></script>
+  <!-- 01 · Pick A-Frame -->
+  <dialog class="case" id="case-pick-a-frame" aria-labelledby="case-paf-title">
+    <div class="case-bar">
+      <span class="case-bar-label">Project 01 / 04</span>
+      <button type="button" class="case-close" data-close aria-label="Close case study">✕</button>
+    </div>
+
+    <header class="case-hero">
+      <p class="case-kind">Flutter mobile app</p>
+      <h2 class="case-title" id="case-paf-title">Pick A-Frame</h2>
+      <p class="case-lede">A cross-platform app for gallery owners, artists, and frame shops in Kuala Lumpur. Upload an artwork, choose a frame, and see the finished piece on a wall before anything is made.</p>
+      <dl class="case-facts">
+        <div><dt>My role</dt><dd>UI</dd></div>
+        <div><dt>Type</dt><dd>Mobile app · Team project</dd></div>
+        <div><dt>Platform</dt><dd>Flutter + Firebase</dd></div>
+        <div><dt>Built for</dt><dd>Galleries, artists, frame shops</dd></div>
+        <div><dt>Status</dt><dd>Completed</dd></div>
+      </dl>
+    </header>
+
+    <section class="case-section case-split">
+      <div>
+        <h3>The goal</h3>
+        <p>Custom framing is hard to picture. You choose a moulding from a small sample, and you only see the real result after it's cut and assembled. Pick A-Frame lets people see the result first.</p>
+      </div>
+      <div class="role-callout">
+        <h3>My role</h3>
+        <p>I was responsible for the <strong>UI</strong> of the app: the layout, visual style, and the screens you see below.</p>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h3>Key features</h3>
+      <div class="feature-list">
+        <article class="feature">
+          <div class="feature-media"><div class="phone shot"><img src="assets/projects/PAF_landingPage.png" alt="Landing page with an artwork upload area" loading="lazy" /></div></div>
+          <div>
+            <span class="feature-no">01</span>
+            <h4>Upload your artwork</h4>
+            <p>Start from a photo of the artwork (JPG, PNG, or HEIC, up to 25 MB) and preview it at 1:1 scale in real time.</p>
+          </div>
+        </article>
+        <article class="feature">
+          <div class="feature-media"><div class="phone shot"><img src="assets/projects/PAF_Catalog.png" alt="Catalog of frame mouldings with prices per metre" loading="lazy" /></div></div>
+          <div>
+            <span class="feature-no">02</span>
+            <h4>Browse the moulding catalog</h4>
+            <p>Search mouldings, filter by material, sort by profile width, and compare prices per metre.</p>
+          </div>
+        </article>
+        <article class="feature">
+          <div class="feature-media"><div class="phone shot"><img src="assets/projects/PAF_Catalog-Map.png" alt="Map of frame shops in Kuala Lumpur" loading="lazy" /></div></div>
+          <div>
+            <span class="feature-no">03</span>
+            <h4>Find frame shops in KL</h4>
+            <p>A map of frame shops around Kuala Lumpur, with each shop's address and the mouldings it stocks.</p>
+          </div>
+        </article>
+        <article class="feature">
+          <div class="feature-media"><div class="phone shot"><img src="assets/projects/PAF_Visualizer.png" alt="Visualizer showing a red frame and mat around an artwork" loading="lazy" /></div></div>
+          <div>
+            <span class="feature-no">04</span>
+            <h4>Design the frame</h4>
+            <p>Pick a finish (paint, wood, metal, ornate), moulding colour and profile, lighting angle, and matting, with live outer dimensions.</p>
+          </div>
+        </article>
+        <article class="feature">
+          <div class="feature-media"><div class="phone shot"><img src="assets/projects/PAF_Exhibit-Room.png" alt="Exhibit room with framed artwork on a living room wall" loading="lazy" /></div></div>
+          <div>
+            <span class="feature-no">05</span>
+            <h4>See it on a wall</h4>
+            <p>Hang the framed piece in a virtual room. Change the wall colour, zoom and lighting, and show a sofa for scale.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h3>Tech</h3>
+      <div class="pc-tags"><span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">Firebase</span><span class="tag">Google Maps</span><span class="tag">Mobile UI/UX</span></div>
+    </section>
+
+    <footer class="case-next">
+      <button type="button" class="btn btn-secondary" data-close>Back to projects</button>
+      <button type="button" class="btn btn-primary" data-open="service-centre">Next: Automotive Service Centre <span aria-hidden="true">→</span></button>
+    </footer>
+  </dialog>
+
+  <!-- 02 · Automotive Service Centre -->
+  <dialog class="case" id="case-service-centre" aria-labelledby="case-asc-title">
+    <div class="case-bar">
+      <span class="case-bar-label">Project 02 / 04</span>
+      <button type="button" class="case-close" data-close aria-label="Close case study">✕</button>
+    </div>
+
+    <header class="case-hero">
+      <p class="case-kind">Java desktop app · APU coursework</p>
+      <h2 class="case-title" id="case-asc-title">APU Automotive Service Centre</h2>
+      <p class="case-lede">A multi-role desktop system for a vehicle service centre, built in Java Swing with object-oriented design and an MVC structure.</p>
+      <dl class="case-facts">
+        <div><dt>Type</dt><dd>Desktop app</dd></div>
+        <div><dt>Stack</dt><dd>Java, Swing, NetBeans</dd></div>
+        <div><dt>Architecture</dt><dd>OOP &amp; MVC</dd></div>
+        <div><dt>Status</dt><dd>Completed</dd></div>
+      </dl>
+    </header>
+
+    <section class="case-section">
+      <h3>Screens</h3>
+      <div class="case-shots">
+        <figure>
+          <div class="window shot"><img src="assets/projects/ASC_landingPage.png" alt="Service Centre login window" loading="lazy" /></div>
+          <figcaption>Login &amp; registration</figcaption>
+        </figure>
+        <figure>
+          <div class="window shot"><img src="assets/projects/ASC_Homepage.png" alt="Customer homepage with vehicle and appointment options" loading="lazy" /></div>
+          <figcaption>Customer homepage</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h3>What it does</h3>
+      <div class="role-grid">
+        <div class="role"><strong>Customer</strong><p>Edit profile, register and view vehicles, book appointments, and view active and past appointments.</p></div>
+        <div class="role"><strong>Counter staff</strong><p>Handle service bookings and payments.</p></div>
+        <div class="role"><strong>Technician</strong><p>Work on the service appointments assigned to them.</p></div>
+        <div class="role"><strong>Manager</strong><p>Oversee bookings and view reports.</p></div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h3>How it's built</h3>
+      <ul class="case-list">
+        <li>Each role has its own dashboard behind a shared login.</li>
+        <li>Object-oriented classes for users, vehicles, and appointments.</li>
+        <li>MVC structure separates the Swing screens from the data and logic.</li>
+      </ul>
+    </section>
+
+    <footer class="case-next">
+      <button type="button" class="btn btn-secondary" data-open="pick-a-frame"><span aria-hidden="true">←</span> Previous</button>
+      <button type="button" class="btn btn-primary" data-open="parcel-system">Next: Smart Campus Parcel System <span aria-hidden="true">→</span></button>
+    </footer>
+  </dialog>
+
+  <!-- 03 · Smart Campus Parcel System -->
+  <dialog class="case" id="case-parcel-system" aria-labelledby="case-parcel-title">
+    <div class="case-bar">
+      <span class="case-bar-label">Project 03 / 04</span>
+      <button type="button" class="case-close" data-close aria-label="Close case study">✕</button>
+    </div>
+
+    <header class="case-hero">
+      <p class="case-kind">C++ console app · APU data structures</p>
+      <h2 class="case-title" id="case-parcel-title">Smart Campus Parcel System</h2>
+      <p class="case-lede">A parcel collection and delivery system for a campus, built around a custom singly linked list priority queue with CSV file sync.</p>
+      <dl class="case-facts">
+        <div><dt>Type</dt><dd>Console app</dd></div>
+        <div><dt>Language</dt><dd>C++</dd></div>
+        <div><dt>Core structure</dt><dd>Linked list priority queue</dd></div>
+        <div><dt>Status</dt><dd>Completed</dd></div>
+      </dl>
+    </header>
+
+    <section class="case-section">
+      <h3>The program</h3>
+      <div class="terminal shot case-terminal">
+        <div class="frame-bar"><span></span><span></span><span></span></div>
+<pre class="term" aria-label="Console menus of the Smart Campus Parcel System">=== Smart Campus Parcel System ===
+1. Parcel Intake, Sorting &amp; Processing (Module 1)
+2. Parcel Service &amp; Collection (Module 2)
+3. Collection Counter &amp; Delivery Resources (Module 3)
+4. Parcel Activity &amp; Record Management (Module 4)
+5. Parcel Category Organisation (Module 5)
+0. Exit
+Choice: <b>2</b>
+
+=== Module 2: Parcel Service &amp; Collection ===
+1. Create service request
+2. View active requests (By ID / By Priority)
+3. Peek next request
+4. Process next request
+5. Cancel request
+0. Back to Main Menu
+Choice: <span class="cursor"></span></pre>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h3>How the queue works</h3>
+      <div class="priority-row">
+        <div class="priority p1"><strong>P1</strong><span>Urgent</span></div>
+        <span class="priority-arrow" aria-hidden="true">→</span>
+        <div class="priority p2"><strong>P2</strong><span>Express</span></div>
+        <span class="priority-arrow" aria-hidden="true">→</span>
+        <div class="priority p3"><strong>P3</strong><span>Normal</span></div>
+      </div>
+      <ul class="case-list">
+        <li>Requests are kept in a sorted singly linked list, so the most urgent parcel is always at the front.</li>
+        <li>Staff can peek at or process the next request, view requests by ID or by priority, and cancel requests.</li>
+        <li>Each service request gets an ID, which is used to collect the parcel.</li>
+        <li>Data is synced to CSV files so records persist between runs.</li>
+      </ul>
+    </section>
+
+    <footer class="case-next">
+      <button type="button" class="btn btn-secondary" data-open="service-centre"><span aria-hidden="true">←</span> Previous</button>
+      <button type="button" class="btn btn-primary" data-open="funnel-concept">Next: Conversion Funnel Concept <span aria-hidden="true">→</span></button>
+    </footer>
+  </dialog>
+
+  <!-- 04 · Conversion Funnel Concept -->
+  <dialog class="case" id="case-funnel-concept" aria-labelledby="case-funnel-title">
+    <div class="case-bar">
+      <span class="case-bar-label">Project 04 / 04</span>
+      <button type="button" class="case-close" data-close aria-label="Close case study">✕</button>
+    </div>
+
+    <header class="case-hero">
+      <p class="case-kind">UI/UX design practice</p>
+      <h2 class="case-title" id="case-funnel-title">Conversion Funnel Concept</h2>
+      <p class="case-lede">A self-initiated landing page and conversion funnel design, exploring visual hierarchy, tablet mockups, and hero layouts.</p>
+      <dl class="case-facts">
+        <div><dt>Type</dt><dd>Landing page design</dd></div>
+        <div><dt>Tools</dt><dd>Figma, Canva</dd></div>
+        <div><dt>Focus</dt><dd>Visual hierarchy</dd></div>
+        <div><dt>Status</dt><dd>Design concept</dd></div>
+      </dl>
+    </header>
+
+    <section class="case-section">
+      <h3>Full design</h3>
+      <p class="case-hint">Scroll inside the frame to see the whole page.</p>
+      <div class="case-tall">
+        <img src="assets/funnel-design.png" alt="Full conversion funnel landing page design by Jasper Tang" loading="lazy" />
+      </div>
+    </section>
+
+    <footer class="case-next">
+      <button type="button" class="btn btn-secondary" data-open="parcel-system"><span aria-hidden="true">←</span> Previous</button>
+      <button type="button" class="btn btn-primary" data-open="pick-a-frame">Back to Project 01 <span aria-hidden="true">→</span></button>
+    </footer>
+  </dialog>
+
+  <script src="script.js?v=6"></script>
 </body>
 </html>
