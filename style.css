@@ -8,7 +8,7 @@
    - No backdrop-filter on cards and no filter: blur() on anything that moves.
    - Every looping animation only touches transform / opacity.
    - Hero scenery is paused when the hero is off-screen (script.js).
-   - prefers-reduced-motion turns all motion off.
+   - prefers-reduced-motion turns all motion off and skips the loader.
    ========================================================================== */
 
 :root {
@@ -210,6 +210,218 @@ code {
   transform: none;
 }
 
+/* Hold the hero content until the gate opens */
+html.show-loader:not(.gates-opening) .hero .reveal {
+  opacity: 0 !important;
+  transform: translateY(28px) !important;
+}
+
+.gates-opening .hero .reveal {
+  transition-delay: 0.35s;
+}
+
+.gates-opening .hero .hero-visual {
+  transition-delay: 0.5s;
+}
+
+/* ==========================================================================
+   LOADER — emblem draws, a signal flare rises, the gate opens
+   ========================================================================== */
+.loader {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.show-loader .loader {
+  display: block;
+}
+
+html.show-loader,
+html.show-loader body {
+  overflow: hidden;
+}
+
+.gate {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50.5%;
+  background-color: #3d3a33;
+  background-image:
+    linear-gradient(180deg, transparent 27%, #1f1d19 27%, #1f1d19 30%, #57524a 30%, #57524a 30.4%, transparent 30.4%, transparent 69%, #1f1d19 69%, #1f1d19 72%, #57524a 72%, #57524a 72.4%, transparent 72.4%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='96'%3E%3Cpath d='M0 1.5H120M0 49.5H120M1.5 0V48M61.5 48V96' stroke='%23000' stroke-opacity='.32' stroke-width='3' fill='none'/%3E%3C/svg%3E"),
+    linear-gradient(180deg, #4a463e 0%, #34312b 100%);
+  will-change: transform;
+  transition: transform 0.95s cubic-bezier(0.76, 0, 0.2, 1);
+}
+
+.gate-left {
+  left: 0;
+  box-shadow: inset -10px 0 0 #1f1d19, inset -14px 0 0 #57524a;
+}
+
+.gate-right {
+  right: 0;
+  box-shadow: inset 10px 0 0 #1f1d19, inset 14px 0 0 #57524a;
+}
+
+.loader.is-opening .gate-left  { transform: translateX(-101%); }
+.loader.is-opening .gate-right { transform: translateX(101%); }
+
+.gate-seam {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 6px;
+  margin-left: -3px;
+  background: linear-gradient(180deg, rgba(255, 248, 224, 0), #fff8e0 30%, #fff8e0 70%, rgba(255, 248, 224, 0));
+  box-shadow: 0 0 24px 6px rgba(255, 236, 180, 0.55);
+  opacity: 0;
+  animation: seamGlow 0.4s ease 1.2s forwards;
+}
+
+.loader.is-opening .gate-seam {
+  animation: none;
+  opacity: 0;
+}
+
+@keyframes seamGlow {
+  to { opacity: 1; }
+}
+
+.loader-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #ece4d1;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.loader.is-opening .loader-center {
+  opacity: 0;
+  transform: scale(0.96);
+}
+
+.loader-emblem {
+  width: 104px;
+  height: 104px;
+  overflow: visible;
+}
+
+.lm-frame {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: emblemDraw 0.9s ease-out forwards;
+}
+
+.lm-text {
+  fill: currentColor;
+  font-family: var(--font-display);
+  font-size: 30px;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  animation: riseIn 0.5s var(--ease) 0.55s forwards;
+}
+
+@keyframes emblemDraw {
+  to { stroke-dashoffset: 0; }
+}
+
+.loader-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  margin-right: -0.32em;
+  opacity: 0;
+  animation: riseIn 0.6s var(--ease) 0.45s forwards;
+}
+
+.loader-sub {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #b9b09a;
+  margin-right: -0.3em;
+  opacity: 0;
+  animation: riseIn 0.6s var(--ease) 0.65s forwards;
+}
+
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.loader-skip {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 28px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(236, 228, 209, 0.45);
+  transition: opacity 0.2s ease;
+}
+
+.loader.is-opening .loader-skip {
+  opacity: 0;
+}
+
+/* Green signal flare */
+.flare {
+  position: absolute;
+  left: 76%;
+  bottom: 0;
+  width: 12px;
+  height: 46vh;
+  opacity: 0;
+  animation: flareUp 1.15s cubic-bezier(0.15, 0.7, 0.3, 1) 0.35s forwards;
+}
+
+.flare-head {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #d8ffd0;
+  box-shadow: 0 0 10px 4px #4ade80, 0 0 28px 10px rgba(34, 197, 94, 0.55);
+}
+
+.flare-trail {
+  position: absolute;
+  top: 6px;
+  left: 3px;
+  width: 6px;
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(180deg, rgba(134, 239, 172, 0.9), rgba(74, 222, 128, 0.35) 40%, rgba(74, 222, 128, 0));
+}
+
+@keyframes flareUp {
+  0%   { opacity: 0; transform: translateY(46vh); }
+  12%  { opacity: 1; }
+  75%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-4vh); }
+}
+
 /* ==========================================================================
    SECTION HEADERS
    ========================================================================== */
@@ -369,13 +581,13 @@ code {
   border-radius: 8px;
   background: var(--accent);
   color: var(--on-accent);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  line-height: 1;
 }
 
-.brand-badge svg {
-  width: 26px;
-  height: 26px;
-  fill: currentColor;
-}
+
 
 .nav-links {
   display: flex;
@@ -893,10 +1105,15 @@ code {
   color: var(--text-3);
 }
 
-.profile-emblem {
-  width: 30px;
-  height: 30px;
-  fill: var(--accent);
+.profile-mark {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  padding: 5px 7px;
+  border: 1.5px solid var(--accent);
+  border-radius: 5px;
+  color: var(--accent);
 }
 
 .profile-identity {
@@ -1788,10 +2005,11 @@ html:has(.case[open]) {
 }
 
 .case-tall {
-  max-height: 70vh;
+  max-height: 75vh;
   overflow-y: auto;
   display: flex;
   justify-content: center;
+  align-items: flex-start; /* keep the portrait image from being squashed */
   padding: 24px;
   background: #070d1f;
   border-radius: var(--radius-md);
@@ -1799,8 +2017,9 @@ html:has(.case[open]) {
 
 .case-tall img {
   width: 100%;
-  max-width: 520px;
+  max-width: 417px; /* native width: no upscaling blur */
   height: auto;
+  flex-shrink: 0;
   border-radius: 8px;
 }
 
@@ -2182,14 +2401,23 @@ html:has(.case[open]) {
   gap: 10px;
 }
 
-.footer-emblem {
-  width: 44px;
-  height: 44px;
-  fill: rgba(255, 255, 255, 0.9);
+.footer-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  border-radius: 10px;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  letter-spacing: 0.04em;
+  color: #fff;
 }
 
-[data-theme="dark"] .footer-emblem {
-  fill: #5eead4;
+[data-theme="dark"] .footer-mark {
+  border-color: #5eead4;
+  color: #5eead4;
 }
 
 .footer-motto {

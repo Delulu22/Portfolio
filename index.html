@@ -5,18 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jasper Tang See Yong — Frontend Developer &amp; UI/UX</title>
   <meta name="description" content="Portfolio of Jasper Tang See Yong, Software Engineering undergraduate at APU Kuala Lumpur focusing on Frontend Development, UI/UX Design, and Flutter mobile apps." />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%232f5d46'/%3E%3Cg fill='%23f3eee3'%3E%3Cpath d='M32 16 35 30 32 50 29 30Z'/%3E%3Cg id='w'%3E%3Cpath d='M36 21C44 13 53 10 61 10 57 17 49 23 38 26Z'/%3E%3Cpath d='M36 30C44 24 52 22 59 23 54 29 46 32 38 34Z'/%3E%3Cpath d='M36 39C42 35 49 34 55 36 50 41 44 43 38 42Z'/%3E%3C/g%3E%3Cuse href='%23w' transform='matrix(-1 0 0 1 64 0)'/%3E%3C/g%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2712%27 fill=%27%232f5d46%27/%3E%3Ctext x=%2732%27 y=%2744%27 text-anchor=%27middle%27 font-family=%27Impact,Arial Narrow,sans-serif%27 font-size=%2732%27 fill=%27%23f3eee3%27%3EJT%3C/text%3E%3C/svg%3E" />
 
-  <!-- Theme before first paint (prevents a flash) -->
+  <!-- Theme + loader decision before first paint -->
   <script>
     (function () {
-      var d = document.documentElement, t = null;
+      var d = document.documentElement, t = null, seen = false;
       try { t = localStorage.getItem("jasper-portfolio-theme"); } catch (e) {}
       if (t !== "light" && t !== "dark") {
         t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
       }
       d.setAttribute("data-theme", t);
       d.classList.add("js");
+      try { seen = sessionStorage.getItem("jasper-gate-opened") === "1"; } catch (e) {}
+      var still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!seen && !still) {
+        d.classList.add("show-loader");
+        // Failsafe: never trap the page behind the gate if script.js fails
+        setTimeout(function () { d.classList.remove("show-loader"); }, 5000);
+      }
     })();
   </script>
 
@@ -24,28 +31,30 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="style.css?v=6" />
+  <link rel="stylesheet" href="style.css?v=8" />
 </head>
 <body>
 
-  <!-- Wings emblem (original design), reused everywhere via <use> -->
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <symbol id="wings" viewBox="0 0 64 64">
-      <path pathLength="1" d="M32 16 35 30 32 50 29 30Z" />
-      <g id="wing-r">
-        <path pathLength="1" d="M36 21C44 13 53 10 61 10 57 17 49 23 38 26Z" />
-        <path pathLength="1" d="M36 30C44 24 52 22 59 23 54 29 46 32 38 34Z" />
-        <path pathLength="1" d="M36 39C42 35 49 34 55 36 50 41 44 43 38 42Z" />
-      </g>
-      <use href="#wing-r" transform="matrix(-1 0 0 1 64 0)" />
-    </symbol>
-  </svg>
+
+  <!-- ===== LOADER: emblem → signal flare → the gate opens ===== -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="gate gate-left"></div>
+    <div class="gate gate-right"></div>
+    <div class="gate-seam"></div>
+    <div class="flare"><span class="flare-trail"></span><span class="flare-head"></span></div>
+    <div class="loader-center">
+      <svg class="loader-emblem" viewBox="0 0 64 64" width="104" height="104"><rect class="lm-frame" x="3" y="3" width="58" height="58" rx="10" pathLength="1" /><text class="lm-text" x="32" y="43" text-anchor="middle">JT</text></svg>
+      <p class="loader-name">Jasper Tang</p>
+      <p class="loader-sub">Beyond the walls</p>
+    </div>
+    <p class="loader-skip">Click to skip</p>
+  </div>
 
   <!-- ===== NAVIGATION ===== -->
   <header class="navbar" id="navbar">
     <div class="container nav-inner">
       <a href="#home" class="brand" aria-label="Jasper Tang, back to top">
-        <span class="brand-badge"><svg width="26" height="26"><use href="#wings" /></svg></span>
+        <span class="brand-badge">JT</span>
         <span class="brand-text">Jasper Tang</span>
       </a>
 
@@ -178,7 +187,7 @@
           <div class="profile-card">
             <div class="profile-card-top">
               <span class="profile-id">ID · JT-2005</span>
-              <svg class="profile-emblem" width="30" height="30"><use href="#wings" /></svg>
+              <span class="profile-mark" aria-hidden="true">JT</span>
             </div>
             <div class="profile-identity">
               <div class="avatar-wrapper">
@@ -591,7 +600,7 @@ Choice: <span class="cursor"></span></pre>
     <svg class="footer-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 C240 5 480 5 720 30 S1200 55 1440 30 V60 H0Z"/></svg>
     <div class="footer-sea">
       <div class="container footer-inner">
-        <svg class="footer-emblem" width="44" height="44" aria-hidden="true"><use href="#wings" /></svg>
+        <span class="footer-mark" aria-hidden="true">JT</span>
         <p class="footer-motto">Keep moving forward.</p>
         <p class="footer-credit">Designed &amp; built by <strong>Jasper Tang See Yong</strong> · <span id="currentYear">2026</span> · <a href="#home">Back to top ↑</a></p>
       </div>
@@ -845,6 +854,6 @@ Choice: <span class="cursor"></span></pre>
     </footer>
   </dialog>
 
-  <script src="script.js?v=6"></script>
+  <script src="script.js?v=7"></script>
 </body>
 </html>

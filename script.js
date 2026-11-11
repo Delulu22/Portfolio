@@ -6,6 +6,27 @@ document.addEventListener("DOMContentLoaded", () => {
   const root = document.documentElement;
   const hasIO = "IntersectionObserver" in window;
 
+  // 1. Loader: emblem → signal flare → the gate opens (once per visit)
+  const loader = document.getElementById("loader");
+  if (loader && root.classList.contains("show-loader")) {
+    let opened = false;
+    const openGate = () => {
+      if (opened) return;
+      opened = true;
+      root.classList.add("gates-opening");
+      loader.classList.add("is-opening");
+      try { sessionStorage.setItem("jasper-gate-opened", "1"); } catch (e) { /* private mode */ }
+      setTimeout(() => {
+        root.classList.remove("show-loader", "gates-opening");
+      }, 1000);
+    };
+    const timer = setTimeout(openGate, 1650);
+    loader.addEventListener("click", () => {
+      clearTimeout(timer);
+      openGate();
+    });
+  }
+
   // 2. Footer year
   const yearEl = document.getElementById("currentYear");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
