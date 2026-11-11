@@ -3,32 +3,37 @@
    ========================================================================== */
 
 :root {
-  /* Warm Light Mode Palette */
-  --bg-primary: #faf8f5;
-  --bg-secondary: #f2ede4;
-  --bg-surface: #ffffff;
-  --bg-surface-elevated: #fcfaf7;
-  --bg-glass: rgba(250, 248, 245, 0.85);
+  /* 🌅 Sunset Horizon & Coastal Cloud Palette (Light Mode) */
+  --bg-primary: #f7f9fc;
+  --bg-sky-gradient: linear-gradient(160deg, #ffedd5 0%, #fed7aa 20%, #fde2e4 42%, #e0f2fe 78%, #f0f9ff 100%);
+  --bg-secondary: rgba(224, 242, 254, 0.45);
+  --bg-surface: rgba(255, 255, 255, 0.82);
+  --bg-surface-elevated: rgba(255, 250, 245, 0.9);
+  --bg-glass: rgba(255, 248, 242, 0.78);
 
-  --text-primary: #1c1917;
-  --text-secondary: #57534e;
-  --text-muted: #78716c;
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
 
-  /* Warm Amber / Terracotta & Clean Royal Blue Accents */
-  --accent-primary: #d97706;
-  --accent-primary-hover: #b45309;
-  --accent-soft: rgba(217, 119, 6, 0.12);
-  --accent-blue: #2563eb;
-  --accent-blue-soft: rgba(37, 99, 235, 0.1);
-  --accent-green: #16a34a;
-  --accent-green-soft: rgba(22, 163, 74, 0.12);
+  /* Sunset Coral-Amber & Ocean Turquoise Accents */
+  --accent-primary: #ea580c;
+  --accent-primary-hover: #c2410c;
+  --accent-soft: rgba(234, 88, 12, 0.12);
+  --accent-blue: #0284c7;
+  --accent-blue-soft: rgba(2, 132, 199, 0.12);
+  --accent-green: #0d9488;
+  --accent-green-soft: rgba(13, 148, 136, 0.14);
 
-  --border-color: #e7e2da;
-  --border-strong: #d6cfc4;
+  --border-color: rgba(148, 163, 184, 0.28);
+  --border-strong: rgba(100, 116, 139, 0.38);
 
-  --shadow-sm: 0 2px 8px rgba(28, 25, 23, 0.04);
-  --shadow-md: 0 10px 30px -5px rgba(28, 25, 23, 0.07), 0 4px 12px -2px rgba(28, 25, 23, 0.04);
-  --shadow-lg: 0 20px 45px -10px rgba(28, 25, 23, 0.12);
+  --wave-1: rgba(2, 132, 199, 0.18);
+  --wave-2: rgba(249, 115, 22, 0.16);
+  --wave-3: rgba(255, 255, 255, 0.65);
+
+  --shadow-sm: 0 4px 16px rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 14px 34px -6px rgba(15, 23, 42, 0.08), 0 4px 14px -2px rgba(234, 88, 12, 0.06);
+  --shadow-lg: 0 24px 50px -12px rgba(15, 23, 42, 0.14);
 
   --radius-sm: 10px;
   --radius-md: 16px;
@@ -38,35 +43,41 @@
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  --transition: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Cozy Dark Mode Palette */
+/* 🌌 Bioluminescent Night-Glow Ocean & Starry Sky Palette (Dark Mode) */
 [data-theme="dark"] {
-  --bg-primary: #121110;
-  --bg-secondary: #1a1816;
-  --bg-surface: #1f1d1b;
-  --bg-surface-elevated: #272421;
-  --bg-glass: rgba(18, 17, 16, 0.85);
+  --bg-primary: #060e1e;
+  --bg-sky-gradient: linear-gradient(165deg, #040814 0%, #09152b 35%, #112240 70%, #0b2942 100%);
+  --bg-secondary: rgba(10, 25, 47, 0.55);
+  --bg-surface: rgba(15, 30, 56, 0.76);
+  --bg-surface-elevated: rgba(22, 42, 74, 0.85);
+  --bg-glass: rgba(8, 18, 36, 0.8);
 
-  --text-primary: #f5f5f4;
-  --text-secondary: #a8a29e;
-  --text-muted: #78716c;
+  --text-primary: #f0f9ff;
+  --text-secondary: #bae6fd;
+  --text-muted: #7dd3fc;
 
-  --accent-primary: #f59e0b;
-  --accent-primary-hover: #fbbf24;
-  --accent-soft: rgba(245, 158, 11, 0.15);
-  --accent-blue: #60a5fa;
-  --accent-blue-soft: rgba(96, 165, 250, 0.15);
-  --accent-green: #4ade80;
-  --accent-green-soft: rgba(74, 222, 128, 0.15);
+  /* Bioluminescent Cyan / Sea Firefly Glow & Sunset Twilight Accents */
+  --accent-primary: #38bdf8;
+  --accent-primary-hover: #7dd3fc;
+  --accent-soft: rgba(56, 189, 248, 0.16);
+  --accent-blue: #2dd4bf;
+  --accent-blue-soft: rgba(45, 212, 191, 0.16);
+  --accent-green: #34d399;
+  --accent-green-soft: rgba(52, 211, 153, 0.16);
 
-  --border-color: #2e2b28;
-  --border-strong: #3f3b37;
+  --border-color: rgba(56, 189, 248, 0.22);
+  --border-strong: rgba(45, 212, 191, 0.42);
 
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
-  --shadow-md: 0 12px 32px -4px rgba(0, 0, 0, 0.45);
-  --shadow-lg: 0 24px 48px -8px rgba(0, 0, 0, 0.65);
+  --wave-1: rgba(56, 189, 248, 0.2);
+  --wave-2: rgba(45, 212, 191, 0.18);
+  --wave-3: rgba(15, 30, 56, 0.75);
+
+  --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 14px 36px -4px rgba(0, 0, 0, 0.55), 0 0 24px rgba(56, 189, 248, 0.08);
+  --shadow-lg: 0 24px 52px -8px rgba(0, 0, 0, 0.75), 0 0 32px rgba(45, 212, 191, 0.15);
 }
 
 /* ==========================================================================
@@ -87,13 +98,183 @@ html {
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--bg-primary);
+  background: var(--bg-sky-gradient);
+  background-attachment: fixed;
   color: var(--text-primary);
   line-height: 1.65;
   font-size: 16px;
-  transition: background-color var(--transition), color var(--transition);
+  transition: background var(--transition), color var(--transition);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+/* ==========================================================================
+   ATMOSPHERIC SKY: SUNSET ORB, FLOATING CLOUDS, NIGHT GLOW & OCEAN WAVES
+   ========================================================================== */
+.sky-atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Glowing Sunset Sun / Night Moon-Glow Orb */
+.celestial-orb {
+  position: absolute;
+  top: 9%;
+  right: 12%;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(251, 146, 60, 0.55) 0%, rgba(244, 63, 94, 0.28) 45%, transparent 72%);
+  filter: blur(18px);
+  transition: all 0.8s ease;
+  animation: pulseOrb 8s ease-in-out infinite alternate;
+}
+
+[data-theme="dark"] .celestial-orb {
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.42) 0%, rgba(45, 212, 191, 0.22) 45%, transparent 72%);
+  box-shadow: 0 0 90px rgba(56, 189, 248, 0.25);
+}
+
+/* Aurora / Twilight Ribbon */
+.aurora-ribbon {
+  position: absolute;
+  top: 22%;
+  left: -10%;
+  width: 120%;
+  height: 240px;
+  background: linear-gradient(90deg, transparent, rgba(251, 113, 133, 0.18), rgba(251, 191, 36, 0.16), rgba(56, 189, 248, 0.18), transparent);
+  filter: blur(45px);
+  transform: rotate(-6deg);
+  transition: all 0.8s ease;
+}
+
+[data-theme="dark"] .aurora-ribbon {
+  background: linear-gradient(90deg, transparent, rgba(45, 212, 191, 0.22), rgba(56, 189, 248, 0.25), rgba(168, 85, 247, 0.18), transparent);
+}
+
+/* Drifting Clouds */
+.cloud {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.65);
+  border-radius: 999px;
+  filter: blur(8px);
+  transition: background 0.6s ease, opacity 0.6s ease;
+}
+
+[data-theme="dark"] .cloud {
+  background: rgba(56, 189, 248, 0.09);
+  box-shadow: 0 0 30px rgba(56, 189, 248, 0.12);
+}
+
+.cloud-1 {
+  width: 260px;
+  height: 68px;
+  top: 14%;
+  left: -280px;
+  animation: driftCloud 48s linear infinite;
+}
+
+.cloud-2 {
+  width: 340px;
+  height: 84px;
+  top: 32%;
+  left: -360px;
+  opacity: 0.75;
+  animation: driftCloud 64s linear infinite 12s;
+}
+
+.cloud-3 {
+  width: 220px;
+  height: 56px;
+  top: 52%;
+  left: -240px;
+  opacity: 0.6;
+  animation: driftCloud 54s linear infinite 26s;
+}
+
+@keyframes driftCloud {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(100vw + 420px)); }
+}
+
+@keyframes pulseOrb {
+  0% { transform: scale(1) translateY(0); }
+  100% { transform: scale(1.12) translateY(-12px); }
+}
+
+/* Night-Glow Stars & Bioluminescent Sea Fireflies */
+.night-glow-particles {
+  position: absolute;
+  inset: 0;
+}
+
+.glow-dot {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background: rgba(251, 146, 60, 0.45);
+  box-shadow: 0 0 10px rgba(251, 146, 60, 0.6);
+  animation: twinkleGlow 3.6s ease-in-out infinite alternate;
+  animation-delay: var(--delay);
+}
+
+[data-theme="dark"] .glow-dot {
+  background: #e0f2fe;
+  box-shadow: 0 0 12px #38bdf8, 0 0 24px #2dd4bf;
+}
+
+[data-theme="dark"] .glow-dot.sea-firefly {
+  background: #2dd4bf;
+  box-shadow: 0 0 16px #2dd4bf, 0 0 32px #38bdf8;
+}
+
+@keyframes twinkleGlow {
+  0% { opacity: 0.2; transform: scale(0.8) translateY(0); }
+  100% { opacity: 1; transform: scale(1.35) translateY(-8px); }
+}
+
+/* Rolling Ocean Waves at Bottom of Hero */
+.ocean-waves {
+  width: 100%;
+  margin-top: 48px;
+  line-height: 0;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+
+.waves-svg {
+  position: relative;
+  width: 100%;
+  height: 76px;
+  min-height: 56px;
+}
+
+.wave-layer-1 {
+  fill: var(--wave-1);
+  animation: moveWaves 12s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+}
+
+.wave-layer-2 {
+  fill: var(--wave-2);
+  animation: moveWaves 18s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite reverse;
+}
+
+.wave-layer-3 {
+  fill: var(--wave-3);
+  animation: moveWaves 24s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+}
+
+@keyframes moveWaves {
+  0% { transform: translate3d(-90px, 0, 0); }
+  50% { transform: translate3d(85px, 0, 0); }
+  100% { transform: translate3d(-90px, 0, 0); }
 }
 
 a {
@@ -308,15 +489,20 @@ code {
 }
 
 .theme-toggle {
-  width: 40px;
   height: 40px;
-  border-radius: 50%;
-  border: 1px solid var(--border-color);
+  padding: 0 14px;
+   gap: 7px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-strong);
   background: var(--bg-surface);
+  backdrop-filter: blur(12px);
   color: var(--text-primary);
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 700;
   cursor: pointer;
   transition: all var(--transition);
 }
@@ -324,20 +510,24 @@ code {
 .theme-toggle:hover {
   border-color: var(--accent-primary);
   color: var(--accent-primary);
-  transform: rotate(12deg);
+  transform: translateY(-2px);
 }
 
-[data-theme="light"] .icon-moon {
-  display: block;
+[data-theme="light"] .icon-moon,
+[data-theme="light"] .theme-label-sunset {
+  display: inline-block;
 }
-[data-theme="light"] .icon-sun {
+[data-theme="light"] .icon-sun,
+[data-theme="light"] .theme-label-night {
   display: none;
 }
-[data-theme="dark"] .icon-moon {
+[data-theme="dark"] .icon-moon,
+[data-theme="dark"] .theme-label-sunset {
   display: none;
 }
-[data-theme="dark"] .icon-sun {
-  display: block;
+[data-theme="dark"] .icon-sun,
+[data-theme="dark"] .theme-label-night {
+  display: inline-block;
 }
 
 .menu-toggle {
@@ -469,11 +659,23 @@ code {
 /* Profile Card in Hero */
 .profile-card {
   background: var(--bg-surface);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
   overflow: hidden;
   transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.bento-card,
+.project-card,
+.process-step,
+.timeline-card,
+.skill-card,
+.contact-box {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 .profile-card:hover {

@@ -16,6 +16,35 @@
 </head>
 <body>
 
+  <!-- ===== ATMOSPHERIC SKY: SUNSET GLOW, DRIFTING CLOUDS & NIGHT BIOLUMINESCENCE ===== -->
+  <div class="sky-atmosphere" aria-hidden="true">
+    <div class="celestial-orb"></div>
+    <div class="aurora-ribbon"></div>
+
+    <!-- Twinkling Stars & Night-Glow Bioluminescent Particles -->
+    <div class="night-glow-particles">
+      <span class="glow-dot" style="--x: 8%; --y: 14%; --size: 3px; --delay: 0s;"></span>
+      <span class="glow-dot" style="--x: 19%; --y: 28%; --size: 4px; --delay: 1.2s;"></span>
+      <span class="glow-dot" style="--x: 32%; --y: 12%; --size: 2.5px; --delay: 2.4s;"></span>
+      <span class="glow-dot" style="--x: 47%; --y: 22%; --size: 3.5px; --delay: 0.7s;"></span>
+      <span class="glow-dot" style="--x: 63%; --y: 16%; --size: 3px; --delay: 1.9s;"></span>
+      <span class="glow-dot" style="--x: 76%; --y: 30%; --size: 4.5px; --delay: 0.4s;"></span>
+      <span class="glow-dot" style="--x: 88%; --y: 18%; --size: 3px; --delay: 2.8s;"></span>
+      <span class="glow-dot" style="--x: 14%; --y: 52%; --size: 3.5px; --delay: 1.5s;"></span>
+      <span class="glow-dot" style="--x: 54%; --y: 46%; --size: 2.5px; --delay: 3.1s;"></span>
+      <span class="glow-dot" style="--x: 82%; --y: 58%; --size: 4px; --delay: 0.9s;"></span>
+      <span class="glow-dot sea-firefly" style="--x: 24%; --y: 75%; --size: 5px; --delay: 0.3s;"></span>
+      <span class="glow-dot sea-firefly" style="--x: 42%; --y: 82%; --size: 6px; --delay: 1.7s;"></span>
+      <span class="glow-dot sea-firefly" style="--x: 68%; --y: 78%; --size: 5px; --delay: 2.2s;"></span>
+      <span class="glow-dot sea-firefly" style="--x: 86%; --y: 84%; --size: 5.5px; --delay: 1.1s;"></span>
+    </div>
+
+    <!-- Drifting Clouds -->
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="cloud cloud-3"></div>
+  </div>
+
   <!-- ===== TOP NAVIGATION BAR ===== -->
   <header class="navbar" id="navbar">
     <div class="container nav-inner">
@@ -36,10 +65,12 @@
       </nav>
 
       <div class="nav-actions">
-        <!-- Warm Light / Cozy Dark Mode Toggle -->
-        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle color theme" title="Switch Light / Dark Mode">
-          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        <!-- Sunset Cloud / Night Glow Mode Toggle -->
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle Sunset or Night Glow theme" title="Switch between Sunset Horizon &amp; Night Glow Ocean">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          <span class="theme-label-sunset">Night Glow</span>
+          <span class="theme-label-night">Sunset Sky</span>
         </button>
 
         <a href="RESUME_JASPER%20TANG%20SEE%20YONG.pdf" target="_blank" rel="noopener" class="btn btn-sm btn-outline nav-resume-btn">
@@ -98,6 +129,11 @@
             </div>
             <div class="fact-divider"></div>
             <div class="fact-item">
+              <span class="fact-label">MBTI</span>
+              <span class="fact-value">🧭 ISTP (Hands-On Solver)</span>
+            </div>
+            <div class="fact-divider"></div>
+            <div class="fact-item">
               <span class="fact-label">Languages</span>
               <span class="fact-value">💬 EN · 中文 · BM</span>
             </div>
@@ -111,14 +147,14 @@
               <div class="window-dots">
                 <span></span><span></span><span></span>
               </div>
-              <span class="window-title">jasper-profile.card</span>
+              <span class="window-title">sabah-horizon // jasper.card</span>
             </div>
 
             <div class="profile-card-body">
               <div class="profile-identity">
                 <div class="avatar-wrapper">
                   <img src="assets/jasper-portrait.png" alt="Portrait of Jasper Tang See Yong" class="avatar-img" />
-                  <span class="avatar-badge" title="Team Player & Builder">✨</span>
+                  <span class="avatar-badge" title="Ocean &amp; Sunset Vibes">🌊</span>
                 </div>
                 <div class="profile-meta">
                   <h2>Jasper Tang See Yong</h2>
@@ -126,6 +162,7 @@
                   <div class="mini-tags">
                     <span>Frontend Dev</span>
                     <span>UI/UX</span>
+                    <span>ISTP</span>
                     <span>Team Player</span>
                   </div>
                 </div>
@@ -160,6 +197,20 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- Rolling Ocean Waves Divider at Bottom of Hero -->
+      <div class="ocean-waves" aria-hidden="true">
+        <svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none">
+          <defs>
+            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+          </defs>
+          <g class="wave-parallax">
+            <use href="#gentle-wave" x="48" y="0" class="wave-layer-1" />
+            <use href="#gentle-wave" x="48" y="3" class="wave-layer-2" />
+            <use href="#gentle-wave" x="48" y="6" class="wave-layer-3" />
+          </g>
+        </svg>
       </div>
     </section>
 
@@ -197,12 +248,12 @@
             </p>
           </article>
 
-          <!-- Card 3: Teamwork & Charity -->
+          <!-- Card 3: Teamwork, ISTP & Charity -->
           <article class="bento-card bento-team reveal">
-            <div class="bento-tag">Work Style &amp; Community</div>
-            <h3>🤝 Team Player &amp; Charity Co-Planner</h3>
+            <div class="bento-tag">ISTP · Work Style &amp; Community</div>
+            <h3>🧭 ISTP Problem Solver &amp; Team Player</h3>
             <p>
-              I love working closely with others. During my internship at Wish Group Resources, beyond coding websites, I teamed up with my colleagues to <strong>plan and organize a charity trip taking children from an orphanage to visit a chocolate factory</strong>.
+              As an <strong>ISTP</strong>, I'm calm, observant, and love fixing practical problems hands-on. At the same time, I'm a strong team player—during my internship at Wish Group Resources, I teamed up with my colleagues to <strong>plan and organize a charity trip taking children from an orphanage to visit a chocolate factory</strong>.
             </p>
           </article>
 
@@ -269,6 +320,7 @@
             <button class="filter-btn" data-filter="mobile" type="button">Mobile (Flutter)</button>
             <button class="filter-btn" data-filter="uiux" type="button">UI/UX Design</button>
             <button class="filter-btn" data-filter="web" type="button">Frontend &amp; Web</button>
+            <button class="filter-btn" data-filter="apu" type="button">APU Coursework (Java / C++)</button>
             <button class="filter-btn" data-filter="concept" type="button">Family Concepts (Upcoming)</button>
           </div>
         </div>
@@ -304,12 +356,8 @@
               </div>
               <h3 class="project-title">Pick A-Frame — Custom Art Framing App</h3>
               <p class="project-text">
-                A specialized mobile application built with <strong>Flutter</strong> designed for <strong>gallery owners, artists, and frame shop owners</strong>. It simplifies the process of browsing mouldings, matching mat boards, and visualizing how different frames complement an artwork before production.
+                Developing a cross-platform mobile application in <strong>Flutter</strong> for gallery owners, artists, and frame shop owners to browse, match, and preview custom frames for artwork.
               </p>
-              <ul class="project-highlights">
-                <li>Designed clean, distraction-free mobile workflows tailored for visual creators and shop owners.</li>
-                <li>Built cross-platform UI components in Flutter focusing on smooth frame comparison and selection.</li>
-              </ul>
               <div class="project-tags">
                 <span class="tag">Flutter</span>
                 <span class="tag">Mobile UI/UX</span>
@@ -335,12 +383,8 @@
               </div>
               <h3 class="project-title">Conversion Funnel &amp; Hero Concept Exploration</h3>
               <p class="project-text">
-                A self-initiated UI/UX landing page and conversion funnel design exploration. Created to practice clear visual hierarchy, high-converting call-to-action sections, tablet device mockups, and diverse hero banner styles (gaming, modern corporate, and lifestyle).
+                A self-initiated UI/UX landing page and conversion funnel design practice exploring clean visual hierarchy, tablet mockups, and modern hero banner layouts.
               </p>
-              <ul class="project-highlights">
-                <li>Structured a beginner-friendly 3-step service flow (<em>Discovery → Design → Deliver</em>).</li>
-                <li>Explored dark-mode royal blue gradients, typography contrast, and personal branding layout.</li>
-              </ul>
               <div class="project-tags">
                 <span class="tag">UI/UX Design</span>
                 <span class="tag">Landing Page</span>
@@ -394,7 +438,82 @@
             </div>
           </article>
 
-          <!-- PROJECT 4: Upcoming Concept - Grandfather's Factory Car Booking System -->
+          <!-- PROJECT 4: APU Java OOP - Vehicle Service & Appointment Management System -->
+          <article class="project-card reveal" data-category="apu">
+            <div class="project-preview car-preview">
+              <div class="preview-badge">APU Java OOP Project · NetBeans &amp; Swing GUI</div>
+              <div class="mock-browser">
+                <div class="mock-browser-bar"><span></span><span></span><span></span></div>
+                <div class="mock-car-ui">
+                  <div class="mock-car-header">🚘 Vehicle Service &amp; Appointment System</div>
+                  <div class="mock-car-cards">
+                    <div class="mock-car-item">
+                      <strong>4-Role MVC Desktop App</strong>
+                      <span>Customer · Counter Staff · Technician · Manager</span>
+                    </div>
+                    <div class="mock-car-badge">Java Swing</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="project-type">APU Coursework · Object-Oriented Programming</span>
+                <span class="project-status status-shipped">Completed (Java)</span>
+              </div>
+              <h3 class="project-title">Vehicle Service &amp; Appointment Management System</h3>
+              <p class="project-text">
+                Built a multi-role desktop application in <strong>Java Swing</strong> using OOP principles for customers, counter staff, technicians, and managers to handle vehicle service bookings, payments, and reports.
+              </p>
+              <div class="project-tags">
+                <span class="tag">Java</span>
+                <span class="tag">Java Swing GUI</span>
+                <span class="tag">OOP &amp; MVC</span>
+                <span class="tag">NetBeans</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- PROJECT 5: APU C++ Data Structures - Parcel Service & Priority Queue System -->
+          <article class="project-card reveal" data-category="apu">
+            <div class="project-preview car-preview">
+              <div class="preview-badge">APU Data Structures · Custom C++ Implementation</div>
+              <div class="mock-browser">
+                <div class="mock-browser-bar"><span></span><span></span><span></span></div>
+                <div class="mock-car-ui">
+                  <div class="mock-car-header">📦 Parcel Service Priority Queue (C++)</div>
+                  <div class="mock-car-cards">
+                    <div class="mock-car-item">
+                      <strong>P1 Urgent → P2 Express → P3 Normal</strong>
+                      <span>Sorted Singly Linked List · CSV Sync</span>
+                    </div>
+                    <div class="mock-car-badge">C++ / DSA</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="project-type">APU Coursework · Data Structures</span>
+                <span class="project-status status-shipped">Completed (C++)</span>
+              </div>
+              <h3 class="project-title">Parcel Service &amp; Priority Queue Management System</h3>
+              <p class="project-text">
+                Developed a <strong>C++</strong> parcel collection and delivery system using a custom Singly Linked List Priority Queue and CSV file handling to manage parcel requests by urgency.
+              </p>
+              <div class="project-tags">
+                <span class="tag">C++</span>
+                <span class="tag">Data Structures</span>
+                <span class="tag">Singly Linked List</span>
+                <span class="tag">Priority Queue</span>
+                <span class="tag">CSV File I/O</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- PROJECT 6: Upcoming Concept - Grandfather's Factory Car Booking System -->
           <article class="project-card project-concept-card reveal" data-category="web concept">
             <div class="project-preview car-preview">
               <div class="preview-badge">Future Concept Blueprint · Not Yet Built</div>
