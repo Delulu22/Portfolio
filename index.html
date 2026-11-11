@@ -5,34 +5,68 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jasper Tang See Yong — Frontend Developer &amp; UI/UX</title>
   <meta name="description" content="Portfolio of Jasper Tang See Yong, Software Engineering undergraduate at APU Kuala Lumpur focusing on Frontend Development, UI/UX Design, and Flutter mobile apps." />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a74b8'/%3E%3Cpath d='M6 17q5-6 10 0q5-6 10 0' fill='none' stroke='white' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%232f5d46'/%3E%3Cg fill='%23f3eee3'%3E%3Cpath d='M32 16 35 30 32 50 29 30Z'/%3E%3Cg id='w'%3E%3Cpath d='M36 21C44 13 53 10 61 10 57 17 49 23 38 26Z'/%3E%3Cpath d='M36 30C44 24 52 22 59 23 54 29 46 32 38 34Z'/%3E%3Cpath d='M36 39C42 35 49 34 55 36 50 41 44 43 38 42Z'/%3E%3C/g%3E%3Cuse href='%23w' transform='matrix(-1 0 0 1 64 0)'/%3E%3C/g%3E%3C/svg%3E" />
 
-  <!-- Apply saved / system theme before first paint (prevents a flash) -->
+  <!-- Theme + loader decision before first paint -->
   <script>
     (function () {
-      var t = null;
+      var d = document.documentElement, t = null, seen = false;
       try { t = localStorage.getItem("jasper-portfolio-theme"); } catch (e) {}
       if (t !== "light" && t !== "dark") {
         t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
       }
-      document.documentElement.setAttribute("data-theme", t);
-      document.documentElement.classList.add("js");
+      d.setAttribute("data-theme", t);
+      d.classList.add("js");
+      try { seen = sessionStorage.getItem("jasper-gate-opened") === "1"; } catch (e) {}
+      var still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!seen && !still) {
+        d.classList.add("show-loader");
+        // Failsafe: never trap the page behind the gate if script.js fails
+        setTimeout(function () { d.classList.remove("show-loader"); }, 5000);
+      }
     })();
   </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
+  <!-- Wings emblem (original design), reused everywhere via <use> -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="wings" viewBox="0 0 64 64">
+      <path pathLength="1" d="M32 16 35 30 32 50 29 30Z" />
+      <g id="wing-r">
+        <path pathLength="1" d="M36 21C44 13 53 10 61 10 57 17 49 23 38 26Z" />
+        <path pathLength="1" d="M36 30C44 24 52 22 59 23 54 29 46 32 38 34Z" />
+        <path pathLength="1" d="M36 39C42 35 49 34 55 36 50 41 44 43 38 42Z" />
+      </g>
+      <use href="#wing-r" transform="matrix(-1 0 0 1 64 0)" />
+    </symbol>
+  </svg>
+
+  <!-- ===== LOADER: emblem → signal flare → the gate opens ===== -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="gate gate-left"></div>
+    <div class="gate gate-right"></div>
+    <div class="gate-seam"></div>
+    <div class="flare"><span class="flare-trail"></span><span class="flare-head"></span></div>
+    <div class="loader-center">
+      <svg class="loader-emblem"><use href="#wings" /></svg>
+      <p class="loader-name">Jasper Tang</p>
+      <p class="loader-sub">Beyond the walls</p>
+    </div>
+    <p class="loader-skip">Click to skip</p>
+  </div>
+
   <!-- ===== NAVIGATION ===== -->
   <header class="navbar" id="navbar">
     <div class="container nav-inner">
       <a href="#home" class="brand" aria-label="Jasper Tang, back to top">
-        <span class="brand-badge">JT</span>
+        <span class="brand-badge"><svg><use href="#wings" /></svg></span>
         <span class="brand-text">Jasper Tang</span>
       </a>
 
@@ -65,7 +99,7 @@
   </header>
 
   <main>
-    <!-- ===== HERO: open sky & sea ===== -->
+    <!-- ===== HERO: beyond the walls — sky & sea ===== -->
     <section id="home" class="hero">
       <div class="scene" id="heroScene" aria-hidden="true">
         <div class="sky"></div>
@@ -77,6 +111,14 @@
         <div class="cloud cloud-1"></div>
         <div class="cloud cloud-2"></div>
         <div class="cloud cloud-3"></div>
+
+        <!-- Gusts of wind (speed lines) -->
+        <div class="wind">
+          <span style="--t: 18%; --w: 240px; --dur: 7s;  --d: 0.6s"></span>
+          <span style="--t: 34%; --w: 160px; --dur: 9s;  --d: 2.4s"></span>
+          <span style="--t: 52%; --w: 300px; --dur: 8s;  --d: 4.1s"></span>
+          <span style="--t: 66%; --w: 200px; --dur: 10s; --d: 1.5s"></span>
+        </div>
 
         <div class="flock">
           <svg class="bird" style="--bx: 0px;  --by: 18px; --bd: 0s"    viewBox="0 0 24 10"><path d="M1 8 Q6 1 12 7 Q18 1 23 8"/></svg>
@@ -95,7 +137,6 @@
           </div>
           <div class="sea-body"></div>
 
-          <!-- Sun glints by day · bioluminescent sparks by night -->
           <div class="sea-glow">
             <span style="--x: 7%;  --y: 30%; --d: 0s"></span>
             <span style="--x: 16%; --y: 62%; --d: 1.4s"></span>
@@ -127,17 +168,18 @@
           </div>
 
           <h1 class="hero-title">
-            Hi, I'm Jasper.<br />
-            I build web &amp; mobile experiences that feel <em class="serif">light, clear &amp; free.</em>
+            I design &amp; build<br />
+            interfaces that<br />
+            feel <span class="accent">free.</span>
           </h1>
 
           <p class="hero-subtitle">
-            Software Engineering student at <strong>APU Kuala Lumpur</strong>, raised by the sea in <strong>Kota Kinabalu, Sabah</strong>. I turn messy problems into simple interfaces people actually enjoy using.
+            Hi, I'm <strong>Jasper Tang</strong>. I'm a Software Engineering student at <strong>APU Kuala Lumpur</strong>, raised by the sea in <strong>Kota Kinabalu, Sabah</strong>. I turn messy problems into simple interfaces people enjoy using.
           </p>
 
           <div class="hero-cta">
             <a href="#projects" class="btn btn-primary">
-              Explore my work
+              See my expeditions
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
             <a href="RESUME_JASPER%20TANG%20SEE%20YONG.pdf" download="RESUME_JASPER_TANG_SEE_YONG.pdf" class="btn btn-secondary">
@@ -155,10 +197,13 @@
 
         <aside class="hero-visual reveal">
           <div class="profile-card">
+            <div class="profile-card-top">
+              <span class="profile-id">ID · JT-2005</span>
+              <svg class="profile-emblem"><use href="#wings" /></svg>
+            </div>
             <div class="profile-identity">
               <div class="avatar-wrapper">
                 <img src="assets/jasper-portrait.png" alt="Portrait of Jasper Tang See Yong" class="avatar-img" width="82" height="96" />
-                <span class="avatar-badge" aria-hidden="true">🌊</span>
               </div>
               <div class="profile-meta">
                 <h2>Jasper Tang See Yong</h2>
@@ -193,7 +238,7 @@
       <div class="container">
         <div class="section-header reveal">
           <span class="section-eyebrow">01 · About</span>
-          <h2 class="section-title">A developer with a designer's eye &amp; a <em class="serif">team-first</em> mindset.</h2>
+          <h2 class="section-title">A developer with a<br />designer's <span class="accent">eye.</span></h2>
           <p class="section-desc">Beyond writing code, I care about how real people feel when they use a website or app.</p>
         </div>
 
@@ -202,19 +247,18 @@
             <div class="bento-tag">My story</div>
             <h3>From the coast of Sabah to building usable products in KL</h3>
             <p>
-              I grew up in <strong>Kota Kinabalu, Sabah</strong> and moved to Kuala Lumpur to study Software Engineering at <strong>Asia Pacific University (APU)</strong>. I finished my Diploma in ICT (Software Engineering) in 2025 and I'm now doing my Bachelor's degree.
+              I grew up in <strong>Kota Kinabalu, Sabah</strong> and moved to Kuala Lumpur to study Software Engineering at <strong>Asia Pacific University (APU)</strong>. I finished my Diploma in 2025 and I'm now doing my Bachelor's degree.
             </p>
             <p>
-              During my internship at <strong>Wish Group Resources</strong>, the company website was outdated and hard to navigate. Redesigning and rebuilding it showed me what I enjoy most: <strong>connecting UI/UX design with frontend code</strong> so the interface works for both the business and its users.
+              At my internship with <strong>Wish Group Resources</strong>, the company website was outdated and hard to use. Rebuilding it showed me what I enjoy most: <strong>connecting UI/UX design with frontend code.</strong>
             </p>
           </article>
 
           <article class="bento-card bento-team reveal">
             <div class="bento-tag">How I work with people</div>
-            <h3>ISTP problem solver &amp; team player</h3>
-            <p>
-              As an <strong>ISTP</strong>, I'm calm, observant, and like fixing practical problems hands-on. I also enjoy working in a team. At Wish Group, I helped plan a <strong>charity trip that took children from an orphanage to visit a chocolate factory</strong>.
-            </p>
+            <h3>Calm ISTP, team player</h3>
+            <p>I stay calm and like fixing real problems hands-on, together with a team.</p>
+            <p class="team-note">❤ Co-planned a charity trip for orphanage children at Wish Group.</p>
           </article>
 
           <article class="bento-card bento-life reveal">
@@ -231,227 +275,203 @@
       </div>
     </section>
 
-    <!-- ===== PROJECTS ===== -->
+    <!-- ===== PROJECTS: expedition log ===== -->
     <section id="projects" class="section section-alt">
       <div class="container">
         <div class="section-header reveal">
-          <span class="section-eyebrow">02 · Selected work</span>
-          <h2 class="section-title">Projects &amp; design explorations</h2>
-          <p class="section-desc">Mobile app development, a real internship website revamp, UI/UX practice, APU coursework, and what's next.</p>
+          <span class="section-eyebrow">02 · Expedition log</span>
+          <h2 class="section-title">Selected <span class="accent">work.</span></h2>
+          <p class="section-desc">Each project is one expedition: a problem I went out to solve, and what I brought back.</p>
         </div>
 
-        <div class="project-filters reveal" role="group" aria-label="Filter projects">
-          <button class="filter-btn active" data-filter="all" type="button" aria-pressed="true">All</button>
-          <button class="filter-btn" data-filter="mobile" type="button" aria-pressed="false">Mobile</button>
-          <button class="filter-btn" data-filter="web" type="button" aria-pressed="false">Web &amp; UI/UX</button>
-          <button class="filter-btn" data-filter="apu" type="button" aria-pressed="false">APU coursework</button>
-          <button class="filter-btn" data-filter="upcoming" type="button" aria-pressed="false">Upcoming</button>
-        </div>
+        <div class="expeditions">
 
-        <div class="projects-grid">
-
-          <!-- Pick A-Frame (featured, interactive) -->
-          <article class="project-card project-wide reveal" data-category="mobile">
-            <div class="project-preview frame-demo-preview">
-              <div class="preview-badge">Interactive · try a frame</div>
-              <div class="artwork-stage">
-                <div class="artwork-frame frame-oak" id="demoFrame">
-                  <div class="artwork-mat">
-                    <div class="artwork-canvas">
-                      <span class="art-sun"></span>
-                      <span class="art-sea"></span>
-                      <span class="art-caption">Pick A-Frame</span>
-                    </div>
-                  </div>
+          <!-- 01 · Pick A-Frame -->
+          <article class="expedition expedition-feature reveal">
+            <div class="exp-info exp-info-split">
+              <div>
+                <div class="exp-head">
+                  <span class="exp-no">Expedition 01 · Featured</span>
+                  <span class="stamp stamp-done">Completed</span>
                 </div>
+                <h3 class="exp-title exp-title-xl">Pick A-Frame</h3>
+                <p class="exp-kind">Flutter mobile app</p>
               </div>
-              <div class="frame-controls" role="group" aria-label="Frame style">
-                <button type="button" class="frame-swatch active" data-frame="frame-oak" aria-pressed="true">Warm Oak</button>
-                <button type="button" class="frame-swatch" data-frame="frame-black" aria-pressed="false">Gallery Black</button>
-                <button type="button" class="frame-swatch" data-frame="frame-white" aria-pressed="false">Museum White</button>
+              <div>
+                <p class="exp-text">A cross-platform app that lets gallery owners, artists, and frame shops browse frame mouldings, preview them around their artwork, and see the result on a wall before anything is cut.</p>
+                <dl class="exp-meta">
+                  <div><dt>Built for</dt><dd>Galleries, artists &amp; frame shops</dd></div>
+                  <div><dt>Features</dt><dd>Upload · Catalog · KL shop map · Visualizer · Exhibit room</dd></div>
+                </dl>
+                <div class="exp-tags">
+                  <span class="tag">Flutter</span>
+                  <span class="tag">Mobile UI/UX</span>
+                  <span class="tag">Cross-platform</span>
+                </div>
               </div>
             </div>
 
-            <div class="project-body">
-              <div class="project-meta">
-                <span class="project-type">Mobile app · Current project</span>
-                <span class="project-status status-active">In progress</span>
+            <div class="exp-media media-gallery" tabindex="0" aria-label="Pick A-Frame screens">
+              <figure class="screen">
+                <div class="phone shot"><img src="assets/projects/PAF_landingPage.png" alt="Pick A-Frame landing page with artwork upload" loading="lazy" /></div>
+                <figcaption><b>01</b> Upload your art</figcaption>
+              </figure>
+              <figure class="screen">
+                <div class="phone shot"><img src="assets/projects/PAF_Catalog.png" alt="Catalog of frame mouldings with prices per metre" loading="lazy" /></div>
+                <figcaption><b>02</b> Browse mouldings</figcaption>
+              </figure>
+              <figure class="screen">
+                <div class="phone shot"><img src="assets/projects/PAF_Catalog-Map.png" alt="Map of frame shops in Kuala Lumpur with their mouldings" loading="lazy" /></div>
+                <figcaption><b>03</b> Find KL shops</figcaption>
+              </figure>
+              <figure class="screen">
+                <div class="phone shot"><img src="assets/projects/PAF_Visualizer.png" alt="Visualizer previewing a red frame and mat around an artwork" loading="lazy" /></div>
+                <figcaption><b>04</b> Design the frame</figcaption>
+              </figure>
+              <figure class="screen">
+                <div class="phone shot"><img src="assets/projects/PAF_Exhibit-Room.png" alt="Exhibit room showing framed artwork on a living room wall" loading="lazy" /></div>
+                <figcaption><b>05</b> See it on a wall</figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <!-- 02 · Wish Group website (text only) -->
+          <article class="expedition expedition-text reveal">
+            <div class="exp-info exp-info-split">
+              <div>
+                <div class="exp-head">
+                  <span class="exp-no">Expedition 02</span>
+                  <span class="stamp stamp-done">Shipped</span>
+                </div>
+                <h3 class="exp-title">Company website overhaul</h3>
+                <p class="exp-kind">Internship · Wish Group Resources</p>
               </div>
-              <h3 class="project-title">Pick A-Frame: custom art framing app</h3>
-              <p class="project-text">
-                A cross-platform <strong>Flutter</strong> app for gallery owners, artists, and frame shops to browse, match, and preview custom frames for artwork.
-              </p>
-              <div class="project-tags">
-                <span class="tag">Flutter</span>
-                <span class="tag">Mobile UI/UX</span>
-                <span class="tag">Cross-platform</span>
-                <span class="tag">Product design</span>
+              <div>
+                <p class="exp-text">The company's website was outdated and hard to use on mobile. I redesigned and rebuilt the pages into a clean, responsive web and mobile experience.</p>
+                <div class="exp-tags">
+                  <span class="tag">HTML</span>
+                  <span class="tag">CSS</span>
+                  <span class="tag">JavaScript</span>
+                  <span class="tag">Tailwind</span>
+                  <span class="tag">Canva</span>
+                </div>
               </div>
             </div>
           </article>
 
-          <!-- Funnel UI design -->
-          <article class="project-card reveal" data-category="web">
-            <button type="button" class="project-preview funnel-preview" data-open-modal aria-label="View the full funnel design mockup">
-              <img src="assets/funnel-design.png" alt="" class="funnel-thumb" loading="lazy" />
-              <span class="preview-overlay"><span class="zoom-pill">🔍 View full design</span></span>
-            </button>
-
-            <div class="project-body">
-              <div class="project-meta">
-                <span class="project-type">UI/UX practice</span>
-                <span class="project-status">Design</span>
+          <!-- 03 · Funnel UI -->
+          <article class="expedition reveal">
+            <div class="exp-media">
+              <button type="button" class="browser shot shot-tall" data-open-modal aria-label="View the full funnel design mockup">
+                <span class="frame-bar"><span></span><span></span><span></span></span>
+                <img src="assets/funnel-design.png" alt="" loading="lazy" />
+                <span class="zoom-pill">🔍 View full design</span>
+              </button>
+            </div>
+            <div class="exp-info">
+              <div class="exp-head">
+                <span class="exp-no">Expedition 03</span>
+                <span class="stamp stamp-design">Design</span>
               </div>
-              <h3 class="project-title">Conversion funnel &amp; hero concept</h3>
-              <p class="project-text">
-                A self-initiated landing page and conversion funnel design exploring visual hierarchy, tablet mockups, and hero layouts.
-              </p>
-              <div class="project-tags">
+              <h3 class="exp-title">Conversion funnel concept</h3>
+              <p class="exp-kind">UI/UX practice</p>
+              <p class="exp-text">A self-initiated landing page and conversion funnel design, exploring visual hierarchy, tablet mockups, and hero layouts.</p>
+              <div class="exp-tags">
                 <span class="tag">UI/UX</span>
                 <span class="tag">Landing page</span>
                 <span class="tag">Figma / Canva</span>
               </div>
-              <div class="project-actions">
+              <div class="exp-actions">
                 <button type="button" class="btn btn-sm btn-secondary" data-open-modal>View full mockup ↗</button>
               </div>
             </div>
           </article>
 
-          <!-- Wish Group revamp -->
-          <article class="project-card reveal" data-category="web">
-            <div class="project-preview revamp-preview">
-              <div class="before-after-visual">
-                <div class="ba-card ba-before">
-                  <span class="ba-label">Before</span>
-                  <div class="ba-wire"></div>
-                  <div class="ba-wire short"></div>
-                  <span class="ba-note">Cluttered, poor mobile UX</span>
-                </div>
-                <div class="ba-arrow" aria-hidden="true">→</div>
-                <div class="ba-card ba-after">
-                  <span class="ba-label">After</span>
-                  <div class="ba-hero-bar"></div>
-                  <div class="ba-grid-bars"><span></span><span></span></div>
-                  <span class="ba-note">Clean &amp; responsive</span>
-                </div>
-              </div>
+          <!-- 04 · Java vehicle system -->
+          <article class="expedition reveal">
+            <div class="exp-media media-stack">
+              <div class="window shot window-back"><img src="assets/projects/ASC_landingPage.png" alt="APU Automotive Service Centre login window" loading="lazy" /></div>
+              <div class="window shot window-front"><img src="assets/projects/ASC_Homepage.png" alt="Customer homepage with options to register vehicles and book appointments" loading="lazy" /></div>
             </div>
-
-            <div class="project-body">
-              <div class="project-meta">
-                <span class="project-type">Internship project</span>
-                <span class="project-status status-shipped">Shipped</span>
+            <div class="exp-info">
+              <div class="exp-head">
+                <span class="exp-no">Expedition 04</span>
+                <span class="stamp stamp-done">Completed</span>
               </div>
-              <h3 class="project-title">Company website &amp; mobile landing page overhaul</h3>
-              <p class="project-text">
-                At <strong>Wish Group Resources</strong>, I redesigned and rebuilt the company's outdated pages into a modern, responsive web and mobile experience.
-              </p>
-              <div class="project-tags">
-                <span class="tag">HTML</span>
-                <span class="tag">CSS</span>
-                <span class="tag">JavaScript</span>
-                <span class="tag">Tailwind</span>
-                <span class="tag">Canva</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Java vehicle system -->
-          <article class="project-card reveal" data-category="apu">
-            <div class="project-preview mock-preview">
-              <div class="preview-badge">Java · Swing GUI</div>
-              <div class="mock-window">
-                <div class="mock-window-bar"><span></span><span></span><span></span></div>
-                <div class="mock-window-body">
-                  <div class="mock-title">🚘 Vehicle Service System</div>
-                  <div class="mock-row">
-                    <div><strong>4-role MVC desktop app</strong><span>Customer · Staff · Technician · Manager</span></div>
-                    <span class="mock-badge">Java</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="project-body">
-              <div class="project-meta">
-                <span class="project-type">APU · Object-oriented programming</span>
-                <span class="project-status status-shipped">Completed</span>
-              </div>
-              <h3 class="project-title">Vehicle service &amp; appointment system</h3>
-              <p class="project-text">
-                A multi-role <strong>Java Swing</strong> desktop app built with OOP and MVC for customers, counter staff, technicians, and managers to handle bookings, payments, and reports.
-              </p>
-              <div class="project-tags">
+              <h3 class="exp-title">Vehicle service system</h3>
+              <p class="exp-kind">APU Automotive Service Centre · Java OOP</p>
+              <p class="exp-text">A multi-role Java Swing desktop app built with OOP and MVC, where customers, counter staff, technicians, and managers handle bookings, payments, and reports.</p>
+              <dl class="exp-meta">
+                <div><dt>Roles</dt><dd>Customer · Staff · Technician · Manager</dd></div>
+              </dl>
+              <div class="exp-tags">
                 <span class="tag">Java</span>
                 <span class="tag">Swing</span>
                 <span class="tag">OOP &amp; MVC</span>
-                <span class="tag">NetBeans</span>
               </div>
             </div>
           </article>
 
-          <!-- C++ parcel system -->
-          <article class="project-card reveal" data-category="apu">
-            <div class="project-preview mock-preview">
-              <div class="preview-badge">C++ · Data structures</div>
-              <div class="mock-window">
-                <div class="mock-window-bar"><span></span><span></span><span></span></div>
-                <div class="mock-window-body">
-                  <div class="mock-title">📦 Parcel Priority Queue</div>
-                  <div class="mock-row">
-                    <div><strong>P1 Urgent → P2 Express → P3 Normal</strong><span>Sorted singly linked list · CSV sync</span></div>
-                    <span class="mock-badge">C++</span>
-                  </div>
-                </div>
+          <!-- 05 · C++ parcel system -->
+          <article class="expedition reveal">
+            <div class="exp-media">
+              <div class="terminal shot">
+                <div class="frame-bar"><span></span><span></span><span></span></div>
+<pre class="term" aria-label="Console menus of the Smart Campus Parcel System">=== Smart Campus Parcel System ===
+1. Parcel Intake, Sorting &amp; Processing (Module 1)
+2. Parcel Service &amp; Collection (Module 2)
+3. Collection Counter &amp; Delivery Resources (Module 3)
+4. Parcel Activity &amp; Record Management (Module 4)
+5. Parcel Category Organisation (Module 5)
+0. Exit
+Choice: <b>2</b>
+
+=== Module 2: Parcel Service &amp; Collection ===
+1. Create service request
+2. View active requests (By ID / By Priority)
+3. Peek next request
+4. Process next request
+5. Cancel request
+0. Back to Main Menu
+Choice: <span class="cursor"></span></pre>
               </div>
             </div>
-
-            <div class="project-body">
-              <div class="project-meta">
-                <span class="project-type">APU · Data structures</span>
-                <span class="project-status status-shipped">Completed</span>
+            <div class="exp-info">
+              <div class="exp-head">
+                <span class="exp-no">Expedition 05</span>
+                <span class="stamp stamp-done">Completed</span>
               </div>
-              <h3 class="project-title">Parcel service &amp; priority queue system</h3>
-              <p class="project-text">
-                A <strong>C++</strong> parcel collection and delivery system using a custom singly linked list priority queue and CSV file handling to process parcels by urgency.
-              </p>
-              <div class="project-tags">
+              <h3 class="exp-title">Parcel priority queue</h3>
+              <p class="exp-kind">Smart Campus Parcel System · C++ data structures</p>
+              <p class="exp-text">A C++ parcel collection and delivery system using a custom singly linked list priority queue and CSV file sync to process urgent parcels first.</p>
+              <dl class="exp-meta">
+                <div><dt>Priority</dt><dd>P1 Urgent → P2 Express → P3 Normal</dd></div>
+              </dl>
+              <div class="exp-tags">
                 <span class="tag">C++</span>
                 <span class="tag">Linked list</span>
                 <span class="tag">Priority queue</span>
-                <span class="tag">File I/O</span>
               </div>
             </div>
           </article>
+        </div>
 
-          <!-- Upcoming family concepts (merged) -->
-          <article class="project-card project-wide project-upcoming reveal" data-category="upcoming">
-            <div class="project-body">
-              <div class="project-meta">
-                <span class="project-type">On the horizon · For my family</span>
-                <span class="project-status status-concept">Concept</span>
-              </div>
-              <h3 class="project-title">Two things I want to build next</h3>
-              <p class="project-text">Both are still ideas, not started yet. They're the reason I want to keep getting better.</p>
-              <div class="upcoming-grid">
-                <div class="upcoming-item">
-                  <span class="upcoming-icon" aria-hidden="true">🏭</span>
-                  <div>
-                    <strong>Car service booking website</strong>
-                    <span>For my grandfather's factory, so vehicle service schedules and bookings can move from paper to a simple web system.</span>
-                  </div>
-                </div>
-                <div class="upcoming-item">
-                  <span class="upcoming-icon" aria-hidden="true">💈</span>
-                  <div>
-                    <strong>Barber booking mobile app</strong>
-                    <span>For my eldest brother, a hairstylist, so his clients can browse a lookbook and book haircut slots easily.</span>
-                  </div>
-                </div>
-              </div>
+        <!-- Next expedition -->
+        <div class="next-expedition reveal">
+          <div class="next-head">
+            <span class="exp-no">Next expedition</span>
+            <h3>Two things I want to build for my family</h3>
+          </div>
+          <div class="next-grid">
+            <div class="next-item">
+              <span aria-hidden="true">🏭</span>
+              <div><strong>Car service booking website</strong><p>For my grandfather's factory, moving service bookings from paper to a simple web system.</p></div>
             </div>
-          </article>
-
+            <div class="next-item">
+              <span aria-hidden="true">💈</span>
+              <div><strong>Barber booking app</strong><p>For my eldest brother, a hairstylist, so clients can browse a lookbook and book slots.</p></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -461,25 +481,24 @@
       <div class="container">
         <div class="section-header reveal">
           <span class="section-eyebrow">03 · How I work</span>
-          <h2 class="section-title">Simple, structured, and collaborative.</h2>
-          <p class="section-desc">Whether it's a company landing page or a Flutter screen, I follow the same three steps.</p>
+          <h2 class="section-title">Simple. Structured.<br /><span class="accent">Together.</span></h2>
         </div>
 
         <ol class="process-grid">
           <li class="process-step reveal">
             <span class="step-num">01</span>
             <h3>Discover</h3>
-            <p>Listen first. Understand the product, the users' pain points, and what isn't working in the current experience.</p>
+            <p>Listen first. Understand the product, the users' pain points, and what isn't working today.</p>
           </li>
           <li class="process-step reveal">
             <span class="step-num">02</span>
             <h3>Design</h3>
-            <p>Map out a clean layout in Figma or Canva with clear hierarchy, readable type, and mobile-first responsiveness.</p>
+            <p>Map out a clean layout in Figma or Canva with clear hierarchy, readable type, and mobile-first thinking.</p>
           </li>
           <li class="process-step reveal">
             <span class="step-num">03</span>
-            <h3>Deliver &amp; iterate</h3>
-            <p>Build it in HTML, CSS, JS, Tailwind, or Flutter, test across screen sizes, and keep improving with team feedback.</p>
+            <h3>Deliver</h3>
+            <p>Build it in HTML, CSS, JS, Tailwind, or Flutter, test across screens, and keep improving with feedback.</p>
           </li>
         </ol>
       </div>
@@ -490,12 +509,12 @@
       <div class="container">
         <div class="section-header reveal">
           <span class="section-eyebrow">04 · Journey</span>
-          <h2 class="section-title">Experience &amp; education</h2>
+          <h2 class="section-title">The road <span class="accent">so far.</span></h2>
         </div>
 
         <div class="timeline">
           <div class="timeline-item reveal">
-            <div class="timeline-marker marker-edu"></div>
+            <div class="timeline-marker"></div>
             <div class="timeline-card">
               <div class="timeline-header">
                 <div>
@@ -531,7 +550,7 @@
           </div>
 
           <div class="timeline-item reveal">
-            <div class="timeline-marker marker-edu"></div>
+            <div class="timeline-marker"></div>
             <div class="timeline-card">
               <div class="timeline-header">
                 <div>
@@ -553,7 +572,7 @@
       <div class="container">
         <div class="section-header reveal">
           <span class="section-eyebrow">05 · Toolkit</span>
-          <h2 class="section-title">Skills I use &amp; tools I'm growing in</h2>
+          <h2 class="section-title">My <span class="accent">gear.</span></h2>
           <p class="section-desc">My strongest area is UI/UX and frontend. APU gave me broad exposure to other languages too.</p>
         </div>
 
@@ -621,7 +640,7 @@
         <div class="contact-box reveal">
           <div class="contact-left">
             <span class="section-eyebrow">06 · Contact</span>
-            <h2 class="contact-title">Looking for a frontend or UI/UX <em class="serif">team player?</em></h2>
+            <h2 class="contact-title">Need a frontend or UI/UX <span class="accent">team player?</span></h2>
             <p class="contact-desc">I'm eager to learn, contribute to real projects, and grow with a supportive team. Reach out any way you like.</p>
 
             <div class="contact-methods">
@@ -686,12 +705,9 @@
     <svg class="footer-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 C240 5 480 5 720 30 S1200 55 1440 30 V60 H0Z"/></svg>
     <div class="footer-sea">
       <div class="container footer-inner">
-        <div class="footer-left">
-          <span class="brand-badge">JT</span>
-          <p>Designed &amp; built by <strong>Jasper Tang See Yong</strong> · <span id="currentYear">2026</span></p>
-        </div>
+        <svg class="footer-emblem" aria-hidden="true"><use href="#wings" /></svg>
         <p class="footer-motto">Keep moving forward.</p>
-        <a href="#home" class="footer-top">Back to top ↑</a>
+        <p class="footer-credit">Designed &amp; built by <strong>Jasper Tang See Yong</strong> · <span id="currentYear">2026</span> · <a href="#home">Back to top ↑</a></p>
       </div>
     </div>
   </footer>

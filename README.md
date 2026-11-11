@@ -12,18 +12,19 @@ Welcome to the repository for my personal portfolio website! Originally from **K
 
 ## ✨ Key Website Highlights
 
-- 🕊️ **"Open Sky & Sea" Theme (inspired by the feeling of freedom)**:
-  - **Day Mode (Light):** Bright daytime sky, sun glow, drifting clouds, a flock of birds, and a rolling sea with sun glints.
+- 🕊️ **"Beyond the Walls" Theme (inspired by the feeling of freedom)**:
+  - **Gate-opening intro:** a wings emblem draws itself, a green signal flare rises, and a stone gate opens onto the sky and sea (plays once per visit, click to skip).
+  - **Day Mode (Light):** Bright daytime sky, sun glow, drifting clouds, a flock of birds, wind gusts, and a rolling sea.
   - **Night Mode (Dark):** Starry sky with a shooting star, moonlight, and a glowing bioluminescent sea.
   - **Smooth by design:** animations only use `transform` / `opacity`, pause when the hero is off-screen, and switch off for users who prefer reduced motion.
-- 🖼️ **Interactive "Pick A-Frame" Preview**: Try clicking different frame styles (*Warm Oak*, *Gallery Black*, *Museum White*) right inside the project card.
+- 🗺️ **Expedition Log Projects**: Each project is presented as an "expedition" with real screenshots in device frames.
 - 🔍 **Full-Height UI Mockup Lightbox**: Inspect my conversion funnel and landing page UI/UX design exploration directly in an interactive modal.
 
 ---
 
 ## 🚀 Featured Projects
 
-- **Pick A-Frame (Flutter Mobile App):** Developing a cross-platform mobile application in Flutter for gallery owners, artists, and frame shop owners to browse, match, and preview custom frames for artwork.
+- **Pick A-Frame (Flutter Mobile App):** Developed a cross-platform mobile application in Flutter for gallery owners, artists, and frame shop owners to browse, match, and preview custom frames for artwork.
 - **Vehicle Service & Appointment System (Java & Swing GUI):** Built a multi-role desktop application using Java OOP and MVC architecture for customers, counter staff, technicians, and managers to manage vehicle service bookings, payments, and reports.
 - **Parcel Service Management System (C++ Data Structures):** Developed a C++ parcel collection and delivery system using a custom Singly Linked List Priority Queue and CSV file synchronization to process urgent and normal parcels.
 - **Company Website & Mobile Landing Page Overhaul (Internship @ Wish Group Resources):** Redesigned and updated outdated company websites using HTML, CSS, JavaScript, Tailwind CSS, and Canva.

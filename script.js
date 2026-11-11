@@ -6,11 +6,32 @@ document.addEventListener("DOMContentLoaded", () => {
   const root = document.documentElement;
   const hasIO = "IntersectionObserver" in window;
 
-  // 1. Footer year
+  // 1. Loader: emblem → signal flare → the gate opens (once per visit)
+  const loader = document.getElementById("loader");
+  if (loader && root.classList.contains("show-loader")) {
+    let opened = false;
+    const openGate = () => {
+      if (opened) return;
+      opened = true;
+      root.classList.add("gates-opening");
+      loader.classList.add("is-opening");
+      try { sessionStorage.setItem("jasper-gate-opened", "1"); } catch (e) { /* private mode */ }
+      setTimeout(() => {
+        root.classList.remove("show-loader", "gates-opening");
+      }, 1000);
+    };
+    const timer = setTimeout(openGate, 1650);
+    loader.addEventListener("click", () => {
+      clearTimeout(timer);
+      openGate();
+    });
+  }
+
+  // 2. Footer year
   const yearEl = document.getElementById("currentYear");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // 2. Day / night toggle (initial theme is set inline in <head>)
+  // 3. Day / night toggle (initial theme is set inline in <head>)
   const themeToggle = document.getElementById("themeToggle");
   const syncToggleLabel = () => {
     const isDark = root.getAttribute("data-theme") === "dark";
@@ -25,9 +46,8 @@ document.addEventListener("DOMContentLoaded", () => {
     syncToggleLabel();
   });
 
-  // 3. Navbar: transparent over the hero, solid after scrolling
+  // 4. Navbar: transparent over the hero, solid after scrolling
   const navbar = document.getElementById("navbar");
-  const hero = document.getElementById("home");
   if (navbar) {
     let ticking = false;
     const updateNav = () => {
@@ -43,15 +63,16 @@ document.addEventListener("DOMContentLoaded", () => {
     updateNav();
   }
 
-  // 4. Pause hero animations when the hero is off-screen (saves GPU/battery)
+  // 5. Pause hero animations when the hero is off-screen
   const scene = document.getElementById("heroScene");
+  const hero = document.getElementById("home");
   if (scene && hero && hasIO) {
     new IntersectionObserver(([entry]) => {
       scene.classList.toggle("is-paused", !entry.isIntersecting);
     }).observe(hero);
   }
 
-  // 5. Scroll reveal (one-time fade-up)
+  // 6. Scroll reveal (one-time fade-up)
   const reveals = document.querySelectorAll(".reveal");
   if (hasIO) {
     const revealObserver = new IntersectionObserver((entries, obs) => {
@@ -67,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
     reveals.forEach((el) => el.classList.add("is-visible"));
   }
 
-  // 6. Highlight the nav link of the section in view
+  // 7. Highlight the nav link of the section in view
   const navLinks = document.querySelectorAll(".nav-link");
   if (hasIO && navLinks.length) {
     const linkFor = new Map();
@@ -86,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
     linkFor.forEach((_, section) => sectionObserver.observe(section));
   }
 
-  // 7. Mobile menu
+  // 8. Mobile menu
   const menuToggle = document.getElementById("menuToggle");
   const navMenu = document.getElementById("navMenu");
   const closeMenu = () => {
@@ -106,36 +127,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 8. Pick A-Frame frame switcher
-  const demoFrame = document.getElementById("demoFrame");
-  const frameSwatches = document.querySelectorAll(".frame-swatch");
-  frameSwatches.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      if (demoFrame) demoFrame.className = `artwork-frame ${btn.dataset.frame}`;
-      frameSwatches.forEach((b) => {
-        b.classList.toggle("active", b === btn);
-        b.setAttribute("aria-pressed", String(b === btn));
-      });
-    });
-  });
-
-  // 9. Project filters
-  const filterBtns = document.querySelectorAll(".filter-btn");
-  const projectCards = document.querySelectorAll(".project-card");
-  filterBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const filter = btn.dataset.filter;
-      filterBtns.forEach((b) => {
-        b.classList.toggle("active", b === btn);
-        b.setAttribute("aria-pressed", String(b === btn));
-      });
-      projectCards.forEach((card) => {
-        const categories = (card.dataset.category || "").split(/\s+/);
-        const show = filter === "all" || categories.includes(filter);
-        card.classList.toggle("hidden", !show);
-        if (show) card.classList.add("is-visible");
-      });
-    });
+  // 9. Project screenshots: show a tidy placeholder if an image is missing
+  document.querySelectorAll(".shot img").forEach((img) => {
+    const markMissing = () => img.closest(".shot")?.classList.add("is-missing");
+    if (img.complete && img.naturalWidth === 0) markMissing();
+    img.addEventListener("error", markMissing);
   });
 
   // 10. Design lightbox
