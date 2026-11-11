@@ -12,9 +12,10 @@ Welcome to the repository for my personal portfolio website! Originally from **K
 
 ## ✨ Key Website Highlights
 
-- 🌅 **Sabah Coastal Horizon Theme (Ocean · Clouds · Sunset · Night Glow)**:
-  - **Sunset Sky Mode (Light):** Warm sunset coral-amber sky gradients, drifting clouds, frosted glassmorphism cards, and animated rolling SVG ocean waves.
-  - **Night Glow Mode (Dark):** Deep midnight ocean navy sky with twinkling stars and bioluminescent cyan/aqua sea-firefly particles.
+- 🕊️ **"Open Sky & Sea" Theme (inspired by the feeling of freedom)**:
+  - **Day Mode (Light):** Bright daytime sky, sun glow, drifting clouds, a flock of birds, and a rolling sea with sun glints.
+  - **Night Mode (Dark):** Starry sky with a shooting star, moonlight, and a glowing bioluminescent sea.
+  - **Smooth by design:** animations only use `transform` / `opacity`, pause when the hero is off-screen, and switch off for users who prefer reduced motion.
 - 🖼️ **Interactive "Pick A-Frame" Preview**: Try clicking different frame styles (*Warm Oak*, *Gallery Black*, *Museum White*) right inside the project card.
 - 🔍 **Full-Height UI Mockup Lightbox**: Inspect my conversion funnel and landing page UI/UX design exploration directly in an interactive modal.
 
@@ -34,9 +35,9 @@ Welcome to the repository for my personal portfolio website! Originally from **K
 
 | Category | Technologies & Tools |
 | :--- | :--- |
-| **Frontend & Mobile** | `HTML5` · `CSS3` · `JavaScript (ES6+)` · `Tailwind CSS` · `Flutter` |
+| **Frontend & Mobile** | `HTML` · `CSS` · `JavaScript` · `Tailwind CSS` · `Flutter` |
 | **UI/UX & Creative** | `Figma` · `Canva` · `CapCut` |
-| **SE Foundations (APU)** | `Java (Swing GUI, OOP)` · `C++ (Data Structures)` · `Python` · `PHP` · `MySQL` |
+| **SE Foundations (APU)** | `Java` · `C++` · `Python` · `PHP` · `MySQL` |
 | **Workflow & Teamwork** | `VS Code` · `NetBeans` · `Git & GitHub` · `Notion` · `Google Sheets` |
 
 ---
